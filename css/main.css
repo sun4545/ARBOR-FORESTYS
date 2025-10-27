@@ -64,9 +64,8 @@ body {
 }
 
 .navbar-container {
-    max-width: 1920px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 clamp(20px, 4vw, 48px); /* 반응형 패딩: 모바일 20px, 데스크톱 48px */
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -307,12 +306,101 @@ body {
     opacity: 0.7;
 }
 
+.text-button:focus {
+    outline: none;
+}
+
+.text-button:active {
+    outline: none;
+}
+
 .button-icon {
     width: 24px;
     height: 24px;
     filter: brightness(0) invert(1); /* 아이콘을 흰색으로 변경 */
     transition: opacity 0.3s ease;
 }
+
+.text-button__icon,
+.text-button__icon-right {
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.3s ease;
+}
+
+.text-button__icon img,
+.text-button__icon-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* 아이콘 색상은 부모 텍스트 색상을 따름 */
+}
+
+/* 아이콘 색상이 텍스트 색상을 따르도록 설정 */
+.text-button__icon img,
+.text-button__icon-right img {
+    /* SVG 아이콘의 fill 색상을 currentColor로 변환 */
+    filter: brightness(0) saturate(100%) invert(0);
+}
+
+/* Default (흰색 텍스트) - 아이콘도 흰색 */
+.text-button--default .text-button__icon img,
+.text-button--default .text-button__icon-right img,
+.text-button--default img.text-button__icon,
+.text-button--default img.text-button__icon-right {
+    filter: brightness(0) invert(1);
+}
+
+/* Dark (검은색 텍스트) - 아이콘도 검은색 */
+.text-button--dark .text-button__icon img,
+.text-button--dark .text-button__icon-right img,
+.text-button--dark img.text-button__icon,
+.text-button--dark img.text-button__icon-right {
+    filter: brightness(0) invert(0);
+}
+
+/* Primary (컬러 텍스트) - 아이콘도 같은 컬러 */
+.text-button--primary .text-button__icon img,
+.text-button--primary .text-button__icon-right img,
+.text-button--primary img.text-button__icon,
+.text-button--primary img.text-button__icon-right {
+    filter: none;
+}
+
+/* Disabled (회색 텍스트) - 아이콘도 회색 */
+.text-button:disabled .text-button__icon img,
+.text-button:disabled .text-button__icon-right img,
+.text-button:disabled img.text-button__icon,
+.text-button:disabled img.text-button__icon-right {
+    filter: brightness(0) invert(1) opacity(0.5);
+}
+
+/* Hover 상태 - 아이콘도 텍스트와 동일하게 변함 */
+/* Default 버튼 hover - 텍스트가 #EAEAEA로 변함 */
+.text-button--default:hover .text-button__icon img,
+.text-button--default:hover .text-button__icon-right img,
+.text-button--default:hover img.text-button__icon,
+.text-button--default:hover img.text-button__icon-right {
+    filter: brightness(0) invert(0.92); /* #EAEAEA에 가까운 색 */
+}
+
+/* Dark 버튼 hover - 텍스트가 어두워짐 */
+.text-button--dark:hover .text-button__icon img,
+.text-button--dark:hover .text-button__icon-right img,
+.text-button--dark:hover img.text-button__icon,
+.text-button--dark:hover img.text-button__icon-right {
+    filter: brightness(0) invert(0.2); /* 좀 더 어두운 색 */
+}
+
+/* Primary 버튼 hover - 텍스트가 밝아짐 */
+.text-button--primary:hover .text-button__icon img,
+.text-button--primary:hover .text-button__icon-right img,
+.text-button--primary:hover img.text-button__icon,
+.text-button--primary:hover img.text-button__icon-right {
+    filter: brightness(1.1); /* 조금 더 밝게 */
+}
+
+/* Footer BACK TO TOP 버튼 - text-button--default이므로 자동으로 흰색 적용됨 */
 
 
 /* 브랜드 스토리 섹션 01 - Figma 디자인 기반 */
@@ -331,10 +419,10 @@ body {
 
 .brand-story-01-container {
     width: 100%;
-    max-width: 1920px;
     margin: 0 auto;
-    padding: 0 48px;
-    height: 100%;
+    padding: 0 clamp(20px, 4vw, 48px); /* 반응형 패딩: 모바일 20px, 데스크톱 48px */
+    height: auto; /* 내부 컨텐츠에 맞게 hug */
+    min-height: 980px; /* 데스크탑 기준 최소 높이 980px */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -373,8 +461,8 @@ body {
 
 .brand-story-01-image-list {
     display: flex;
-    gap: 120px; /* 1920px 기준 120px 간격 */
-    padding: 0 40px 0 40px; /* 좌우 40px 마진 */
+    gap: clamp(60px, 6vw, 120px); /* 반응형 간격: 최소 60px, 최대 120px */
+    padding: 0 clamp(20px, 3vw, 40px); /* 반응형 패딩: 최소 20px, 최대 40px */
     will-change: transform;
     align-items: flex-start; /* 아이템들을 상단에 정렬하여 hug 효과 */
 }
@@ -635,10 +723,9 @@ body {
 }
 
 .brand-story-02-text-wrapper {
-    max-width: 1920px;
     width: 100%;
     height: 100%; /* 상위 콘텐츠 높이에 맞춰 fill 처리 */
-    padding: 64px 48px; /* 상하 패딩 64px */
+    padding: clamp(32px, 8vh, 64px) clamp(20px, 4vw, 48px); /* 반응형 패딩 */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* space-between으로 변경 */
@@ -678,9 +765,8 @@ body {
 }
 
 .brand-story-03-container {
-    max-width: 1920px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 clamp(20px, 4vw, 48px); /* 반응형 패딩: 모바일 20px, 데스크톱 48px */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -751,9 +837,8 @@ body {
 }
 
 .location-summary-container {
-    max-width: 1920px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 clamp(20px, 4vw, 48px); /* 반응형 패딩: 모바일 20px, 데스크톱 48px */
 }
 
 /* 텍스트 영역 */
@@ -766,6 +851,7 @@ body {
     display: flex;
     justify-content: space-between; /* 텍스트 간 자동 간격 (Figma의 Auto 간격) */
     align-items: flex-start;
+    gap: clamp(24px, 4vw, 48px); /* 최소 간격 24px, 반응형 처리 */
 }
 
 /* 메인 타이틀 */
@@ -809,10 +895,17 @@ body {
     object-fit: cover;
 }
 
-/* 혜택 섹션 */
+/* 혜택 섹션 wrapper - 3개 아이템 롤링을 위한 4.5배 높이 (첫 번째 항목을 더 오래 보이기 위해) */
+.benefit-section-wrapper {
+    height: calc(100vh * 4.5); /* 4.5배 높이로 sticky 해제 지점 설정 */
+    position: relative;
+}
+
+/* 혜택 섹션 - sticky로 고정될 영역 */
 .benefit-section {
     background: #7c7262; /* Figma 배경색 */
-    position: relative;
+    position: sticky; /* sticky 적용 */
+    top: 0; /* 상단에 고정 */
     z-index: 1;
     height: 100vh; /* 뷰포트 100% 높이 */
     overflow: hidden;
@@ -821,11 +914,11 @@ body {
 .benefit-container {
     width: 100%; /* max-width 제거, 100%로 설정 */
     margin: 0 auto;
-    padding-left: 48px; /* 좌측 패딩 48px */
+    padding-left: clamp(20px, 4vw, 48px); /* 반응형 좌측 패딩: 모바일 20px, 데스크톱 48px */
     padding-right: 0; /* 우측 패딩 0 */
     height: 100%;
     display: flex;
-    gap: 80px;
+    gap: clamp(40px, 5vw, 80px); /* 반응형 간격: 최소 40px, 최대 80px */
 }
 
 /* 텍스트 영역 */
@@ -847,24 +940,30 @@ body {
     margin: 0 0 100px 0;
 }
 
-/* 롤링 텍스트 영역 */
+/* 롤링 텍스트 영역 - 컨텐츠를 hug하도록 */
 .benefit-rolling-text {
     position: relative;
-    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 상단 정렬 */
+    max-width: 560px; /* 데스크탑 기준 최대 너비 */
 }
 
 .benefit-item {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative; /* absolute에서 relative로 변경하여 컨텐츠에 맞춤 */
     width: 100%;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s ease-out;
     pointer-events: none;
+    height: 0; /* 기본적으로 숨김 */
+    overflow: hidden; /* 높이가 0일 때 내용 숨김 */
+    display: flex;
+    flex-direction: column; /* flex로 변경하여 benefit-number를 하단에 위치 */
 }
 
 .benefit-item.active {
+    height: auto; /* 활성화 시 높이 자동 */
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -873,14 +972,44 @@ body {
 
 /* 첫 번째 항목이 active일 때만 표시 (겹치지 않도록) */
 .benefit-item:first-child.active {
+    height: auto;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
     z-index: 1;
 }
 
+/* 텍스트 요소별 개별 애니메이션 */
+.benefit-subtitle,
+.benefit-description,
+.benefit-number {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease-out 0.1s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+.benefit-item.active .benefit-subtitle,
+.benefit-item.active .benefit-description,
+.benefit-item.active .benefit-number {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 각 요소별 지연 시간을 다르게 설정 */
+.benefit-item.active .benefit-subtitle {
+    transition-delay: 0.05s;
+}
+
+.benefit-item.active .benefit-description {
+    transition-delay: 0.15s;
+}
+
+.benefit-item.active .benefit-number {
+    transition-delay: 0.25s;
+}
+
 .benefit-item-content {
-    margin-bottom: 24px;
+    margin-bottom: clamp(24px, 10vh, 100px); /* 데스크탑 기준 100px */
 }
 
 .benefit-subtitle {
@@ -910,6 +1039,7 @@ body {
     line-height: 24px;
     color: #ffffff;
     margin: 0;
+    margin-top: auto; /* 좌측 하단으로 정렬 */
 }
 
 /* 이미지 영역 */
@@ -935,13 +1065,13 @@ body {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(30px) scale(1.05);
+    transition: opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .benefit-image.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     z-index: 1; /* 활성 이미지가 위에 표시되도록 */
 }
 
@@ -1031,7 +1161,8 @@ body {
     }
     
     .location-summary-content {
-        gap: 60px; /* 간격 축소 */
+        flex-direction: column; /* 세로 정렬 */
+        gap: clamp(24px, 4vw, 60px); /* 최소 간격 24px 유지, 반응형 처리 */
     }
     
     .location-summary-title {
@@ -1082,8 +1213,18 @@ body {
     
     /* 혜택 섹션 반응형 - 1200px 이하 */
     .benefit-container {
-        padding: 0 32px;
+        flex-direction: column; /* 텍스트가 상단, 이미지가 하단에 배치 */
+        padding: 0; /* 좌우 패딩 제거 */
         gap: 60px;
+    }
+    
+    /* 1200px 이하에서 이미지 영역이 좌우 패딩 없이 풀 너비로 표시 */
+    .benefit-image-area {
+        padding: 0; /* 이미지 영역 좌우 패딩 제거 */
+    }
+    
+    .benefit-text-area {
+        padding: 80px 32px 48px 32px; /* 텍스트 영역 좌우 패딩 추가 */
     }
     
     .benefit-main-title {
@@ -1171,7 +1312,7 @@ body {
     
     .location-summary-content {
         flex-direction: column; /* 세로 정렬 */
-        gap: 40px; /* 간격 축소 */
+        gap: clamp(24px, 3vw, 40px); /* 최소 간격 24px 유지, 반응형 처리 */
     }
     
     .location-summary-title {
@@ -1292,19 +1433,23 @@ body {
     }
     
     /* 혜택 섹션 반응형 - 768px 이하 (모바일 세로) */
+    .benefit-section-wrapper {
+        height: calc(100vh * 3.5); /* 모바일에서는 3.5배 높이 */
+    }
+    
     .benefit-section {
         height: auto; /* 자동 높이 */
         min-height: 100vh;
     }
     
     .benefit-container {
-        flex-direction: column; /* 세로 방향 */
-        padding: 0 24px;
+        flex-direction: column; /* 텍스트가 상단, 이미지가 하단에 배치 */
+        padding: 0; /* 좌우 패딩 제거 */
         gap: 40px;
     }
     
     .benefit-text-area {
-        padding: 80px 0 40px 0;
+        padding: 80px 24px 40px 24px; /* 텍스트 영역 좌우 패딩 추가 */
     }
     
     .benefit-main-title {
@@ -1314,9 +1459,7 @@ body {
         margin-bottom: 60px;
     }
     
-    .benefit-rolling-text {
-        min-height: 250px;
-    }
+
     
     .benefit-subtitle {
         font-size: 21px; /* 768px 이하 크기 조정 */
@@ -1337,6 +1480,7 @@ body {
     
     .benefit-image-area {
         height: 400px; /* 모바일 이미지 높이 */
+        padding: 0; /* 이미지 영역 좌우 패딩 제거 */
     }
 }
 
@@ -1398,7 +1542,7 @@ body {
     }
     
     .location-summary-content {
-        gap: 32px; /* 간격 더 축소 */
+        gap: clamp(24px, 2vw, 32px); /* 최소 간격 24px 유지, 반응형 처리 */
     }
     
     .location-summary-title {
@@ -1519,12 +1663,13 @@ body {
     
     /* 혜택 섹션 반응형 - 480px 이하 (작은 모바일) */
     .benefit-container {
-        padding: 0 16px;
+        flex-direction: column; /* 텍스트가 상단, 이미지가 하단에 배치 */
+        padding: 0; /* 좌우 패딩 제거 */
         gap: 32px;
     }
     
     .benefit-text-area {
-        padding: 60px 0 32px 0;
+        padding: 60px 16px 32px 16px; /* 텍스트 영역 좌우 패딩 추가 */
     }
     
     .benefit-main-title {
@@ -1534,9 +1679,7 @@ body {
         margin-bottom: 40px;
     }
     
-    .benefit-rolling-text {
-        min-height: 200px;
-    }
+
     
     .benefit-subtitle {
         font-size: 16px; /* 480px 이하 크기 조정 */
@@ -1557,6 +1700,7 @@ body {
     
     .benefit-image-area {
         height: 300px; /* 작은 모바일 이미지 높이 */
+        padding: 0; /* 이미지 영역 좌우 패딩 제거 */
     }
 }
 
@@ -1942,192 +2086,416 @@ body {
     color: #ffffff;
 }
 
-/* 푸터 */
+/* Footer 컴포넌트 - components.css와 동일한 스타일 */
 .footer {
-    background: #161616;
-    color: #ffffff;
-    padding: 60px 0 40px;
-    position: relative;
-    z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: clamp(24px, 4vw, 48px); /* 반응형 패딩 */
+  gap: clamp(16px, 2vw, 32px); /* 반응형 간격 */
+  width: 100%; /* max-width 제거하여 1920px 초과에서도 확장 */
+  min-height: 600px; /* 최소 높이 유지 */
+  background: #161616;
+  flex: none;
 }
 
-.footer-content {
-    max-width: 1824px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+.footer__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px;
+  gap: clamp(24px, 4vh, 40px); /* 반응형 gap - 모바일/태블릿 */
+  flex: 0 0 auto;
+  max-width: 687px; /* 최대 너비 유지 */
+  height: 100%;
+}
+
+/* 데스크탑 (1025px 이상) - 간격을 auto로 설정하여 공간 분배 */
+@media (min-width: 1025px) {
+  .footer__left {
+    gap: 0; /* 데스크탑에서는 gap 제거 */
+    min-height: 504px; /* 데스크탑에서 부모 높이 꽉 채우기 */
+  }
+  
+  /* logo-section과 company-info 사이에 자동 간격 추가 */
+  .footer__left > .footer__logo-section + .footer__company-info {
+    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
+  }
+  
+  /* footer__right의 y축 시작점을 footer__menu와 같게 */
+  .footer__right {
+    align-self: flex-start; /* 상단 정렬 */
+    /* footer__logo 높이 (aspect-ratio 2:1) + gap 값 */
+    padding-top: calc(clamp(240px, 30vw, 320px) / 2 + clamp(24px, 4vh, 48px));
+    gap: 0; /* gap 제거하여 auto 간격 적용 */
+    min-height: 504px; /* 컨테이너 높이 504px 채우기 */
+  }
+  
+  /* footer__right 내부에서 contact-section과 copyright 사이에 자동 간격 추가 */
+  .footer__right > .footer__contact-section + .footer__copyright {
+    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
+  }
+  
+  /* footer__right-extended가 컨테이너 504px를 꽉 채우고, 요소 간격을 auto로 설정 */
+  .footer__right-extended {
+    gap: 0; /* gap 제거하여 auto 간격 적용 */
+    min-height: 504px; /* 컨테이너 높이 504px 채우기 */
+  }
+  
+  /* footer__right-extended 내부에서 back-to-top과 made-by 사이에 자동 간격 추가 */
+  .footer__right-extended > .footer__back-to-top + .footer__made-by {
+    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
+  }
+}
+
+.footer__logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: clamp(24px, 4vh, 48px); /* 반응형 gap */
+  width: 100%;
+}
+
+.footer__logo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2.5px;
+  width: clamp(240px, 30vw, 320px); /* 반응형 로고 크기 */
+  height: auto;
+  aspect-ratio: 2 / 1; /* 로고 비율 유지 */
+}
+
+.footer__logo-text {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  font-family: 'Aboreto', serif;
+  font-size: clamp(20px, 3vw, 32px);
+  color: #161616;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.footer__logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.footer__menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px;
+  gap: clamp(16px, 3vw, 32px); /* 반응형 메뉴 간격 */
+  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+  width: 100%;
+}
+
+.footer__menu-item {
+  font-family: 'Arsenal', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(18px, 2.5vw, 32px); /* 반응형 폰트 */
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.footer__menu-item:hover {
+  color: #7C7262;
+}
+
+.footer__company-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 100%;
+}
+
+.footer__company-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(8px, 1.5vw, 14px); /* 반응형 간격 */
+  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+  width: 100%;
+}
+
+.footer__company-name,
+.footer__ceo,
+.footer__registration {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.footer__disclaimer {
+  width: 100%;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(16px, 3vh, 30px); /* 반응형 간격 */
+  flex: 0 0 auto;
+  max-width: 222px;
+  height: 100%; /* 부모의 높이를 100% 채움 */
+}
+
+.footer__contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: clamp(12px, 2vh, 24px); /* 반응형 gap */
+  width: 100%;
+}
+
+.footer__phone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 100%;
+}
+
+.footer__phone-label {
+  width: 100%;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.footer__phone-number {
+  width: 100%;
+  font-family: 'Arsenal', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(20px, 3vw, 32px); /* 반응형 폰트 */
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.footer__address {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 100%;
+}
+
+.footer__address-text {
+  width: 100%;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.footer__email {
+  width: 100%;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__email:hover {
+  color: #7C7262;
+}
+
+.footer__copyright {
+  width: 100%;
+  font-family: 'Arsenal', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__right-extended {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: clamp(20px, 8vh, 82px); /* 반응형 간격 */
+  flex: 0 0 auto;
+  max-width: 167px;
+}
+
+.footer__back-to-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5.5px 0px;
+  gap: 12px;
+  width: 100%;
+}
+
+.footer__made-by {
+  width: 100%;
+  font-family: 'Arsenal', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
+  line-height: 120%;
+  text-align: right;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__gallery-name {
+  display: none; /* 기본적으로 숨김 */
+  width: 100%;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px);
+  line-height: 150%;
+  text-align: right;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.footer__disclaimer-extended {
+  display: none; /* 기본적으로 숨김 */
+  width: 687px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 16px);
+  line-height: 150%;
+  text-align: right;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Footer 모바일 반응형 (768px 이하) - 스택 레이아웃 */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column; /* 세로 배치 */
+    padding: clamp(20px, 5vw, 24px);
+    gap: clamp(20px, 4vh, 32px);
+    min-height: auto;
+  }
+  
+  .footer__left {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .footer__logo {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .footer__menu {
+    gap: 20px; /* 모바일에서 메뉴 간격 */
+  }
+  
+  .footer__menu-item {
+    font-size: 20px;
+  }
+  
+  .footer__company-details {
+    flex-direction: column; /* 모바일에서 세로 배치 */
     align-items: flex-start;
-    margin-bottom: 40px;
-}
-
-.footer-left {
-    flex: 1;
-}
-
-.footer-logo {
-    margin-bottom: 40px;
-}
-
-.footer-logo-img {
-    width: 320px;
-    height: 160px;
-    object-fit: contain;
-    margin-bottom: 20px;
-}
-
-.footer-menu {
-    display: flex;
-    gap: 32px;
-}
-
-.footer-menu-item {
-    color: #ffffff;
-    text-decoration: none;
-    font-family: 'Arsenal', sans-serif;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 32px;
-    transition: opacity 0.3s ease;
-}
-
-.footer-menu-item:hover {
-    opacity: 0.7;
-}
-
-.footer-info {
-    max-width: 687px;
-}
-
-.company-info {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 22.4px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
-.disclaimer {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 22.4px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-    opacity: 0.6;
-}
-
-.footer-right {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.contact-details {
-    max-width: 222px;
-}
-
-.contact-item h4 {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 22.4px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-    margin-bottom: 8px;
-}
-
-.phone-number {
-    font-family: 'Arsenal', sans-serif;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 32px;
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
-.address-item p {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 22.4px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-    margin-bottom: 8px;
-}
-
-.email {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 22.4px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-}
-
-.footer-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 20px;
-}
-
-.back-to-top {
-    display: flex;
-    align-items: center;
     gap: 8px;
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-family: 'Arsenal', sans-serif;
+  }
+  
+  .footer__right {
+    max-width: 100%;
+    width: 100%;
+    gap: 16px;
+  }
+  
+  .footer__phone-number {
     font-size: 24px;
-    font-weight: 400;
-    line-height: 24px;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-    padding: 8px 0;
+  }
+  
+  .footer__right-extended {
+    max-width: 100%;
+    width: 100%;
+    align-items: flex-start; /* 모바일에서 좌측 정렬 */
+    gap: 20px;
+  }
+  
+  .footer__made-by {
+    text-align: left; /* 모바일에서 좌측 정렬 */
+  }
+  
+  .footer__disclaimer-extended {
+    display: block; /* 모바일에서 표시 */
+    width: 100%;
+    text-align: left;
+  }
 }
 
-.back-to-top:hover {
-    opacity: 0.7;
-}
-
-.made-by {
-    font-family: 'Arsenal', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-    opacity: 0.6;
-    text-align: right;
-}
-
-.gallery-info {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-    text-align: right;
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-    text-align: center;
-}
-
-.copyright {
-    font-family: 'Arsenal', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    letter-spacing: -0.32px;
-    color: #ffffff;
-    opacity: 0.6;
+/* Footer 매우 작은 모바일 (480px 이하) */
+@media (max-width: 480px) {
+  .footer__logo {
+    max-width: 240px;
+  }
+  
+  .footer__menu-item {
+    font-size: 18px;
+  }
+  
+  .footer__phone-number {
+    font-size: 20px;
+  }
+  
+  .footer__company-name,
+  .footer__ceo,
+  .footer__registration,
+  .footer__disclaimer {
+    font-size: 12px;
+  }
 }
 
 /* 반응형 디자인 */
@@ -2262,19 +2630,7 @@ body {
         gap: 40px;
     }
     
-    .footer-content {
-        flex-direction: column;
-        gap: 40px;
-    }
-    
-    .footer-actions {
-        align-items: flex-start;
-    }
-    
-    .made-by,
-    .gallery-info {
-        text-align: left;
-    }
+    /* Footer 반응형 스타일은 위의 footer 섹션에서 관리됨 */
 }
 
 @media (max-width: 480px) {

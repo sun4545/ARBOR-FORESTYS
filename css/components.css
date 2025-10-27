@@ -575,9 +575,8 @@
 
 /* Navbar 로고 영역 - HTML 클래스명과 통합 */
 .navbar-container {
-  max-width: 1920px;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 clamp(20px, 4vw, 48px); /* 반응형 패딩: 모바일 20px, 데스크톱 48px */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -2207,6 +2206,78 @@
   display: block;
 }
 
+.text-button__icon img,
+.text-button__icon-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* 아이콘 색상은 부모 텍스트 색상을 따름 */
+}
+
+/* 아이콘 색상이 텍스트 색상을 따르도록 설정 */
+.text-button__icon img,
+.text-button__icon-right img {
+  /* SVG 아이콘의 fill 색상을 currentColor로 변환 */
+  filter: brightness(0) saturate(100%) invert(0);
+}
+
+/* Default (흰색 텍스트) - 아이콘도 흰색 */
+.text-button--default .text-button__icon img,
+.text-button--default .text-button__icon-right img,
+.text-button--default img.text-button__icon,
+.text-button--default img.text-button__icon-right {
+  filter: brightness(0) invert(1);
+}
+
+/* Dark (검은색 텍스트) - 아이콘도 검은색 */
+.text-button--dark .text-button__icon img,
+.text-button--dark .text-button__icon-right img,
+.text-button--dark img.text-button__icon,
+.text-button--dark img.text-button__icon-right {
+  filter: brightness(0) invert(0);
+}
+
+/* Primary (컬러 텍스트) - 아이콘도 같은 컬러 */
+.text-button--primary .text-button__icon img,
+.text-button--primary .text-button__icon-right img,
+.text-button--primary img.text-button__icon,
+.text-button--primary img.text-button__icon-right {
+  filter: none;
+}
+
+/* Disabled (회색 텍스트) - 아이콘도 회색 */
+.text-button:disabled .text-button__icon img,
+.text-button:disabled .text-button__icon-right img,
+.text-button:disabled img.text-button__icon,
+.text-button:disabled img.text-button__icon-right {
+  filter: brightness(0) invert(1) opacity(0.5);
+}
+
+/* Hover 상태 - 아이콘도 텍스트와 동일하게 변함 */
+/* Default 버튼 hover - 텍스트가 #EAEAEA로 변함 */
+.text-button--default:hover .text-button__icon img,
+.text-button--default:hover .text-button__icon-right img,
+.text-button--default:hover img.text-button__icon,
+.text-button--default:hover img.text-button__icon-right {
+  filter: brightness(0) invert(0.92); /* #EAEAEA에 가까운 색 */
+}
+
+/* Dark 버튼 hover - 텍스트가 어두워짐 */
+.text-button--dark:hover .text-button__icon img,
+.text-button--dark:hover .text-button__icon-right img,
+.text-button--dark:hover img.text-button__icon,
+.text-button--dark:hover img.text-button__icon-right {
+  filter: brightness(0) invert(0.2); /* 좀 더 어두운 색 */
+}
+
+/* Primary 버튼 hover - 텍스트가 밝아짐 */
+.text-button--primary:hover .text-button__icon img,
+.text-button--primary:hover .text-button__icon-right img,
+.text-button--primary:hover img.text-button__icon,
+.text-button--primary:hover img.text-button__icon-right {
+  filter: brightness(1.1); /* 조금 더 밝게 */
+}
+
 .text-button__icon-arrow {
   position: absolute;
   width: 24px;
@@ -2268,6 +2339,8 @@
 .text-button--default .text-button__icon-right-arrow {
   background: #FFFFFF;
 }
+
+/* Footer BACK TO TOP 버튼 아이콘 - text-button--default이므로 자동으로 흰색 적용됨 */
 
 /* Hover 상태 */
 .text-button:hover .text-button__icon-arrow {
@@ -2396,8 +2469,7 @@
 }
 
 .text-button:focus {
-  outline: 2px solid #7C7262;
-  outline-offset: 2px;
+  outline: none;
 }
 
 /* Text button 비활성화 */
@@ -2696,7 +2768,7 @@
 .icon-button__icon-line--vertical {
   left: 50.02%;
   right: 49.98%;
-  top: calc(50% - 21px/2 + 0.01px);
+  top: calc(50% - 21px/2 + 0px);
   transform: rotate(-180deg);
 }
 
@@ -3195,14 +3267,12 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 48px;
-  gap: 16px;
-  width: 1920px;
-  height: 600px;
+  padding: clamp(24px, 4vw, 48px); /* 반응형 패딩 */
+  gap: clamp(16px, 2vw, 32px); /* 반응형 간격 */
+  width: 100%; /* max-width 제거하여 1920px 초과에서도 확장 */
+  min-height: 600px; /* 최소 높이 유지 */
   background: #161616;
   flex: none;
-  order: 8;
-  flex-grow: 0;
 }
 
 .footer__left {
@@ -3211,14 +3281,48 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
-  gap: 40px;
-  margin: 0 auto;
-  width: 687px;
-  height: 504px;
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
+  gap: clamp(24px, 4vh, 40px); /* 반응형 gap - 모바일/태블릿 */
+  flex: 0 0 auto;
+  max-width: 687px; /* 최대 너비 유지 */
+  height: 100%;
+}
+
+/* 데스크탑 (1025px 이상) - 간격을 auto로 설정하여 공간 분배 */
+@media (min-width: 1025px) {
+  .footer__left {
+    gap: 0; /* 데스크탑에서는 gap 제거 */
+    min-height: 504px; /* 데스크탑에서 부모 높이 꽉 채우기 */
+  }
+  
+  /* logo-section과 company-info 사이에 자동 간격 추가 */
+  .footer__left > .footer__logo-section + .footer__company-info {
+    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
+  }
+  
+  /* footer__right의 y축 시작점을 footer__menu와 같게 */
+  .footer__right {
+    align-self: flex-start; /* 상단 정렬 */
+    /* footer__logo 높이 (aspect-ratio 2:1) + gap 값 */
+    padding-top: calc(clamp(240px, 30vw, 320px) / 2 + clamp(24px, 4vh, 48px));
+    gap: 0; /* gap 제거하여 auto 간격 적용 */
+    min-height: 504px; /* 컨테이너 높이 504px 채우기 */
+  }
+  
+  /* footer__right 내부에서 contact-section과 copyright 사이에 자동 간격 추가 */
+  .footer__right > .footer__contact-section + .footer__copyright {
+    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
+  }
+  
+  /* footer__right-extended가 컨테이너 504px를 꽉 채우고, 요소 간격을 auto로 설정 */
+  .footer__right-extended {
+    gap: 0; /* gap 제거하여 auto 간격 적용 */
+    min-height: 504px; /* 컨테이너 높이 504px 채우기 */
+  }
+  
+  /* footer__right-extended 내부에서 back-to-top과 made-by 사이에 자동 간격 추가 */
+  .footer__right-extended > .footer__back-to-top + .footer__made-by {
+    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
+  }
 }
 
 .footer__logo-section {
@@ -3226,13 +3330,8 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 48px;
-  margin: 0 auto;
-  width: 347px;
-  height: 240px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  gap: clamp(24px, 4vh, 48px); /* 반응형 gap */
+  width: 100%;
 }
 
 .footer__logo {
@@ -3240,49 +3339,53 @@
   flex-direction: row;
   align-items: flex-start;
   padding: 2.5px;
-  width: 320px;
-  height: 160px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  width: clamp(240px, 30vw, 320px); /* 반응형 로고 크기 */
+  height: auto;
+  aspect-ratio: 2 / 1; /* 로고 비율 유지 */
 }
 
 .footer__logo-text {
-  width: 313.07px;
-  height: 137.91px;
+  width: 100%;
+  height: 100%;
   background: #FFFFFF;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  font-family: 'Aboreto', serif;
+  font-size: clamp(20px, 3vw, 32px);
+  color: #161616;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.footer__logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .footer__menu {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 0px;
-  gap: 32px;
-  width: 347px;
-  height: 32px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  gap: clamp(16px, 3vw, 32px); /* 반응형 메뉴 간격 */
+  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+  width: 100%;
 }
 
 .footer__menu-item {
   font-family: 'Arsenal', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
+  font-size: clamp(18px, 2.5vw, 32px); /* 반응형 폰트 */
   line-height: 100%;
   text-transform: uppercase;
   color: #FFFFFF;
   text-decoration: none;
   transition: color 0.3s ease;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  white-space: nowrap;
 }
 
 .footer__menu-item:hover {
@@ -3295,25 +3398,16 @@
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  margin: 0 auto;
-  width: 687px;
-  height: 52px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  width: 100%;
 }
 
 .footer__company-details {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0px;
-  gap: 14px;
-  width: 439px;
-  height: 22px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  gap: clamp(8px, 1.5vw, 14px); /* 반응형 간격 */
+  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+  width: 100%;
 }
 
 .footer__company-name,
@@ -3322,28 +3416,21 @@
   font-family: 'Pretendard Variable', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
   line-height: 140%;
   letter-spacing: -0.02em;
   color: #FFFFFF;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
 .footer__disclaimer {
-  width: 687px;
-  height: 22px;
+  width: 100%;
   font-family: 'Pretendard Variable', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
   line-height: 140%;
   letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.6);
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 
 .footer__right {
@@ -3351,15 +3438,10 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 208px 0px 0px;
-  gap: 30px;
-  margin: 0 auto;
-  width: 222px;
-  height: 504px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
+  gap: clamp(16px, 3vh, 30px); /* 반응형 간격 */
+  flex: 0 0 auto;
+  max-width: 222px;
+  height: 100%; /* 부모의 높이를 100% 채움 */
 }
 
 .footer__contact-section {
@@ -3367,13 +3449,8 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 24px;
-  margin: 0 auto;
-  width: 222px;
-  height: 130px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  gap: clamp(12px, 2vh, 24px); /* 반응형 gap */
+  width: 100%;
 }
 
 .footer__phone {
@@ -3382,42 +3459,29 @@
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  width: 117px;
-  height: 32px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  width: 100%;
 }
 
 .footer__phone-label {
-  display: none;
-  width: 85px;
-  height: 22px;
+  width: 100%;
   font-family: 'Pretendard Variable', sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
   line-height: 140%;
   letter-spacing: -0.02em;
   color: #FFFFFF;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
 .footer__phone-number {
-  width: 117px;
-  height: 32px;
+  width: 100%;
   font-family: 'Arsenal', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
+  font-size: clamp(20px, 3vw, 32px); /* 반응형 폰트 */
   line-height: 100%;
   text-transform: uppercase;
   color: #FFFFFF;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 
 .footer__address {
@@ -3426,57 +3490,46 @@
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  width: 222px;
-  height: 74px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  width: 100%;
 }
 
 .footer__address-text {
-  width: 222px;
-  height: 44px;
+  width: 100%;
   font-family: 'Pretendard Variable', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
   line-height: 140%;
   letter-spacing: -0.02em;
   color: #FFFFFF;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
 .footer__email {
-  width: 134px;
-  height: 22px;
+  width: 100%;
   font-family: 'Pretendard Variable', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
   line-height: 140%;
   letter-spacing: -0.02em;
   color: #FFFFFF;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__email:hover {
+  color: #7C7262;
 }
 
 .footer__copyright {
-  margin: 0 auto;
-  width: 135px;
-  height: 57px;
+  width: 100%;
   font-family: 'Arsenal', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
   line-height: 120%;
   letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.6);
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 
 .footer__right-extended {
@@ -3484,15 +3537,9 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0px;
-  gap: 82px;
-  margin: 0 auto;
-  width: 167px;
-  height: 504px;
-  flex: none;
-  order: 2;
-  align-self: stretch;
-  flex-grow: 0;
+  gap: clamp(20px, 8vh, 82px); /* 반응형 간격 */
+  flex: 0 0 auto;
+  max-width: 167px;
 }
 
 .footer__back-to-top {
@@ -3501,557 +3548,127 @@
   align-items: center;
   padding: 5.5px 0px;
   gap: 12px;
-  margin: 0 auto;
-  width: 167px;
-  height: 35px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  width: 100%;
 }
 
 .footer__made-by {
-  margin: 0 auto;
-  width: 126px;
-  height: 19px;
+  width: 100%;
   font-family: 'Arsenal', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px); /* 반응형 폰트 */
   line-height: 120%;
   text-align: right;
   letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.6);
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 
 .footer__gallery-name {
-  margin: 0 auto;
-  display: none;
-  width: 143px;
-  height: 24px;
+  display: none; /* 기본적으로 숨김 */
+  width: 100%;
   font-family: 'Pretendard Variable', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px);
   line-height: 150%;
   text-align: right;
   letter-spacing: -0.02em;
   color: #FFFFFF;
-  flex: none;
-  order: 2;
-  flex-grow: 0;
 }
 
 .footer__disclaimer-extended {
-  margin: 0 auto;
-  display: none;
+  display: none; /* 기본적으로 숨김 */
   width: 687px;
-  height: 24px;
   font-family: 'Pretendard Variable', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px);
   line-height: 150%;
   text-align: right;
   letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.6);
-  flex: none;
-  order: 3;
-  flex-grow: 0;
 }
 
-/* Footer 테마 */
-
-/* Light 테마 */
-.footer--light {
-  background: #FFFFFF;
-}
-
-.footer--light .footer__logo-text {
-  background: #161616;
-}
-
-.footer--light .footer__menu-item {
-  color: #161616;
-}
-
-.footer--light .footer__menu-item:hover {
-  color: #7C7262;
-}
-
-.footer--light .footer__company-name,
-.footer--light .footer__ceo,
-.footer--light .footer__registration {
-  color: #161616;
-}
-
-.footer--light .footer__disclaimer {
-  color: rgba(22, 22, 22, 0.6);
-}
-
-.footer--light .footer__phone-number {
-  color: #161616;
-}
-
-.footer--light .footer__address-text,
-.footer--light .footer__email {
-  color: #161616;
-}
-
-.footer--light .footer__copyright,
-.footer--light .footer__made-by {
-  color: rgba(22, 22, 22, 0.6);
-}
-
-/* Primary 테마 */
-.footer--primary {
-  background: #7C7262;
-}
-
-.footer--primary .footer__logo-text {
-  background: #FFFFFF;
-}
-
-.footer--primary .footer__menu-item {
-  color: #FFFFFF;
-}
-
-.footer--primary .footer__menu-item:hover {
-  color: #5A4F42;
-}
-
-.footer--primary .footer__company-name,
-.footer--primary .footer__ceo,
-.footer--primary .footer__registration {
-  color: #FFFFFF;
-}
-
-.footer--primary .footer__disclaimer {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.footer--primary .footer__phone-number {
-  color: #FFFFFF;
-}
-
-.footer--primary .footer__address-text,
-.footer--primary .footer__email {
-  color: #FFFFFF;
-}
-
-.footer--primary .footer__copyright,
-.footer--primary .footer__made-by {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* Footer 반응형 */
-
-/* 태블릿 (769px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .footer {
-    width: 100%;
-    height: auto;
-    padding: 32px 24px;
-    gap: 12px;
-    flex-direction: column;
-  }
-  
-  .footer__left {
-    width: 100%;
-    height: auto;
-    gap: 24px;
-  }
-  
-  .footer__logo-section {
-    width: 100%;
-    height: auto;
-    gap: 32px;
-  }
-  
-  .footer__logo {
-    width: 280px;
-    height: 120px;
-    padding: 2px;
-  }
-  
-  .footer__logo-text {
-    width: 276px;
-    height: 116px;
-  }
-  
-  .footer__menu {
-    width: 100%;
-    height: auto;
-    gap: 24px;
-    justify-content: flex-start;
-  }
-  
-  .footer__menu-item {
-    font-size: 24px;
-  }
-  
-  .footer__company-info {
-    width: 100%;
-    height: auto;
-    gap: 6px;
-  }
-  
-  .footer__company-details {
-    width: 100%;
-    height: auto;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  
-  .footer__company-name,
-  .footer__ceo,
-  .footer__registration {
-    font-size: 14px;
-  }
-  
-  .footer__disclaimer {
-    width: 100%;
-    height: auto;
-    font-size: 14px;
-  }
-  
-  .footer__right {
-    width: 100%;
-    height: auto;
-    padding: 16px 0px 0px;
-    gap: 20px;
-  }
-  
-  .footer__contact-section {
-    width: 100%;
-    height: auto;
-    gap: 16px;
-  }
-  
-  .footer__phone {
-    width: 100%;
-    height: auto;
-  }
-  
-  .footer__phone-number {
-    font-size: 24px;
-  }
-  
-  .footer__address {
-    width: 100%;
-    height: auto;
-  }
-  
-  .footer__address-text,
-  .footer__email {
-    font-size: 14px;
-  }
-  
-  .footer__copyright {
-    width: 100%;
-    height: auto;
-    font-size: 14px;
-  }
-  
-  .footer__right-extended {
-    width: 100%;
-    height: auto;
-    gap: 40px;
-    align-items: flex-start;
-  }
-  
-  .footer__back-to-top {
-    width: 140px;
-    height: 30px;
-    gap: 10px;
-    padding: 4px 0px;
-  }
-  
-  .footer__back-to-top .text-button__text {
-    width: 110px;
-    height: 20px;
-    font-size: 20px;
-  }
-  
-  .footer__made-by {
-    width: 100%;
-    height: auto;
-    font-size: 14px;
-    text-align: left;
-  }
-}
-
-/* 모바일 (768px 이하) */
+/* 모바일 반응형 (768px 이하) - 스택 레이아웃 */
 @media (max-width: 768px) {
   .footer {
-    width: 100%;
-    height: auto;
-    padding: 24px 16px;
-    gap: 8px;
-    flex-direction: column;
+    flex-direction: column; /* 세로 배치 */
+    padding: clamp(20px, 5vw, 24px);
+    gap: clamp(20px, 4vh, 32px);
+    min-height: auto;
   }
   
   .footer__left {
+    max-width: 100%;
     width: 100%;
-    height: auto;
-    gap: 20px;
-  }
-  
-  .footer__logo-section {
-    width: 100%;
-    height: auto;
-    gap: 24px;
   }
   
   .footer__logo {
-    width: 240px;
-    height: 100px;
-    padding: 1.5px;
-  }
-  
-  .footer__logo-text {
-    width: 237px;
-    height: 97px;
+    width: 100%;
+    max-width: 280px;
   }
   
   .footer__menu {
-    width: 100%;
-    height: auto;
-    gap: 20px;
-    justify-content: flex-start;
+    gap: 20px; /* 모바일에서 메뉴 간격 */
   }
   
   .footer__menu-item {
     font-size: 20px;
   }
   
-  .footer__company-info {
-    width: 100%;
-    height: auto;
-    gap: 4px;
-  }
-  
   .footer__company-details {
-    width: 100%;
-    height: auto;
-    gap: 8px;
-    flex-direction: column;
+    flex-direction: column; /* 모바일에서 세로 배치 */
     align-items: flex-start;
-  }
-  
-  .footer__company-name,
-  .footer__ceo,
-  .footer__registration {
-    font-size: 12px;
-  }
-  
-  .footer__disclaimer {
-    width: 100%;
-    height: auto;
-    font-size: 12px;
+    gap: 8px;
   }
   
   .footer__right {
+    max-width: 100%;
     width: 100%;
-    height: auto;
-    padding: 12px 0px 0px;
     gap: 16px;
   }
   
-  .footer__contact-section {
-    width: 100%;
-    height: auto;
-    gap: 12px;
-  }
-  
-  .footer__phone {
-    width: 100%;
-    height: auto;
-  }
-  
   .footer__phone-number {
-    font-size: 20px;
-  }
-  
-  .footer__address {
-    width: 100%;
-    height: auto;
-  }
-  
-  .footer__address-text,
-  .footer__email {
-    font-size: 12px;
-  }
-  
-  .footer__copyright {
-    width: 100%;
-    height: auto;
-    font-size: 12px;
+    font-size: 24px;
   }
   
   .footer__right-extended {
+    max-width: 100%;
     width: 100%;
-    height: auto;
-    gap: 24px;
-    align-items: flex-start;
-  }
-  
-  .footer__back-to-top {
-    width: 120px;
-    height: 28px;
-    gap: 8px;
-    padding: 3px 0px;
-  }
-  
-  .footer__back-to-top .text-button__text {
-    width: 90px;
-    height: 18px;
-    font-size: 18px;
+    align-items: flex-start; /* 모바일에서 좌측 정렬 */
+    gap: 20px;
   }
   
   .footer__made-by {
+    text-align: left; /* 모바일에서 좌측 정렬 */
+  }
+  
+  .footer__disclaimer-extended {
+    display: block; /* 모바일에서 표시 */
     width: 100%;
-    height: auto;
-    font-size: 12px;
     text-align: left;
   }
 }
 
 /* 매우 작은 모바일 (480px 이하) */
 @media (max-width: 480px) {
-  .footer {
-    width: 100%;
-    height: auto;
-    padding: 16px 12px;
-    gap: 6px;
-    flex-direction: column;
-  }
-  
-  .footer__left {
-    width: 100%;
-    height: auto;
-    gap: 16px;
-  }
-  
-  .footer__logo-section {
-    width: 100%;
-    height: auto;
-    gap: 20px;
-  }
-  
   .footer__logo {
-    width: 200px;
-    height: 80px;
-    padding: 1px;
-  }
-  
-  .footer__logo-text {
-    width: 198px;
-    height: 78px;
-  }
-  
-  .footer__menu {
-    width: 100%;
-    height: auto;
-    gap: 16px;
-    justify-content: flex-start;
+    max-width: 240px;
   }
   
   .footer__menu-item {
-    font-size: 16px;
+    font-size: 18px;
   }
   
-  .footer__company-info {
-    width: 100%;
-    height: auto;
-    gap: 3px;
-  }
-  
-  .footer__company-details {
-    width: 100%;
-    height: auto;
-    gap: 6px;
-    flex-direction: column;
-    align-items: flex-start;
+  .footer__phone-number {
+    font-size: 20px;
   }
   
   .footer__company-name,
   .footer__ceo,
-  .footer__registration {
-    font-size: 10px;
-  }
-  
+  .footer__registration,
   .footer__disclaimer {
-    width: 100%;
-    height: auto;
-    font-size: 10px;
-  }
-  
-  .footer__right {
-    width: 100%;
-    height: auto;
-    padding: 8px 0px 0px;
-    gap: 12px;
-  }
-  
-  .footer__contact-section {
-    width: 100%;
-    height: auto;
-    gap: 8px;
-  }
-  
-  .footer__phone {
-    width: 100%;
-    height: auto;
-  }
-  
-  .footer__phone-number {
-    font-size: 16px;
-  }
-  
-  .footer__address {
-    width: 100%;
-    height: auto;
-  }
-  
-  .footer__address-text,
-  .footer__email {
-    font-size: 10px;
-  }
-  
-  .footer__copyright {
-    width: 100%;
-    height: auto;
-    font-size: 10px;
-  }
-  
-  .footer__right-extended {
-    width: 100%;
-    height: auto;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  
-  .footer__back-to-top {
-    width: 100px;
-    height: 24px;
-    gap: 6px;
-    padding: 2px 0px;
-  }
-  
-  .footer__back-to-top .text-button__text {
-    width: 70px;
-    height: 16px;
-    font-size: 16px;
-  }
-  
-  .footer__made-by {
-    width: 100%;
-    height: auto;
-    font-size: 10px;
-    text-align: left;
+    font-size: 12px;
   }
 }
 
@@ -4113,4 +3730,43 @@
   .hero-content {
     padding: 0 15px;
   }
+}
+
+/* Prev&Next 컴포넌트 */
+.prev-next {
+  display: flex;
+  gap: 848px; /* Figma 기준 두 버튼 사이 간격 848px (960px - 48px - 48px - 16px) */
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.prev-next__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.prev-next__button:hover {
+  opacity: 0.7;
+}
+
+.prev-next__button:active {
+  opacity: 0.5;
+}
+
+.prev-next__button:focus {
+  outline: none;
+}
+
+.prev-next__icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }

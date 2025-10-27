@@ -236,9 +236,11 @@
         </div>
     </section>
 
-    <!-- 혜택 섹션 -->
-    <section class="benefit-section">
-        <div class="benefit-container">
+    <!-- 혜택 섹션 wrapper -->
+    <div class="benefit-section-wrapper">
+        <!-- 혜택 섹션 -->
+        <section class="benefit-section">
+            <div class="benefit-container">
             <!-- 텍스트 영역 -->
             <div class="benefit-text-area">
                 <h2 class="benefit-main-title">Connectivity</h2>
@@ -283,7 +285,8 @@
                 </div>
             </div>
         </div>
-    </section>
+        </section>
+    </div>
 
     <!-- 유닛 섹션 -->
     <section class="unit-section">
@@ -364,17 +367,77 @@
     </section>
 
     <!-- 푸터 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <p>&copy; 2024 Arbor Foresty. All rights reserved.</p>
-                </div>
-                <div class="footer-right">
-                    <p>Made by THE GRAP</p>
-                </div>
-            </div>
+    <footer class="footer" data-footer="main-footer">
+      <!-- Left 섹션 -->
+      <div class="footer__left">
+        <!-- 로고 및 메뉴 섹션 -->
+        <div class="footer__logo-section">
+          <!-- 로고 -->
+          <div class="footer__logo">
+            <img src="images/logos/logo.svg" alt="Arbor Foresty" class="footer__logo-img">
+          </div>
+          
+          <!-- 메뉴 -->
+          <nav class="footer__menu">
+            <a href="#about" class="footer__menu-item">About</a>
+            <a href="#services" class="footer__menu-item">Services</a>
+            <a href="#contact" class="footer__menu-item">Contact</a>
+          </nav>
         </div>
+        
+        <!-- 회사 정보 -->
+        <div class="footer__company-info">
+          <div class="footer__company-details">
+            <span class="footer__company-name">(주)아르보포레스티아</span>
+            <span class="footer__ceo">대표이사 : 김그랩</span>
+            <span class="footer__registration">등록번호 : 000-00-00000</span>
+          </div>
+          <p class="footer__disclaimer">
+            ※ 본 홈페이지 내 사용된 CG와 이미지, 내용, 문구 등은 소비자의 이해를 돕기 위해 제작된 것으로 실제와 다릅니다.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Right 섹션 -->
+      <div class="footer__right">
+        <!-- 연락처 정보 -->
+        <div class="footer__contact-section">
+          <!-- 전화번호 -->
+          <div class="footer__phone">
+            <span class="footer__phone-number">546-1520</span>
+          </div>
+          
+          <!-- 주소 및 이메일 -->
+          <div class="footer__address">
+            <p class="footer__address-text">서울특별시 서초구 신반포로49길 12 아르보포레스티갤러리</p>
+            <a href="mailto:hello@thegrap.com" class="footer__email">hello@thegrap.com</a>
+          </div>
+        </div>
+        
+        <!-- 저작권 -->
+        <p class="footer__copyright">ARBOR FORESTY<br>ALL RIGHT RESERVED<br>©2025</p>
+      </div>
+      
+      <!-- Right Extended 섹션 -->
+      <div class="footer__right-extended">
+        <!-- BACK TO TOP 버튼 -->
+        <button class="footer__back-to-top text-button text-button--default" data-text-button="back-to-top" aria-label="맨 위로">
+          <img src="images/icons/Icon:24/Name=Up.svg" alt="Up" class="text-button__icon">
+          <span class="text-button__text">BACK TO TOP</span>
+          <img src="images/icons/Icon:24/Name=Up.svg" alt="Up" class="text-button__icon-right">
+        </button>
+        
+        <!-- 제작사 -->
+        <p class="footer__made-by">MADE BY THE GRAP</p>
+        
+        <!-- 갤러리명 (숨김) -->
+        <p class="footer__gallery-name">아르보 포레스티 갤러리</p>
+        
+        <!-- 면책조항 확장 (숨김) -->
+        <p class="footer__disclaimer-extended">
+          ※ 본 홈페이지 내 사용된 CG와 이미지, 내용, 문구 등은 소비자의 이해를 돕기 위해 제작된 것으로 실제와 다릅니다.
+        </p>
+      </div>
     </footer>
 
     <!-- JavaScript -->
