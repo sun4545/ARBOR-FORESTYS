@@ -1862,155 +1862,254 @@ body {
 }
 
 /* 위치 섹션 */
-.location-section {
-    background: #ffffff;
-    padding: 100px 0;
-    position: relative;
-    z-index: 1;
-}
 
-.location-content {
-    max-width: 1824px;
-    margin: 0 auto;
-}
-
-.location-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 60px;
-}
-
-.location-header .section-title {
-    font-size: 120px;
-    line-height: 120px;
-    letter-spacing: -6px;
-    flex: 1;
-}
-
-.location-description {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.4px;
-    color: #161616;
-    max-width: 480px;
-    flex: 1;
-}
-
-.location-image {
-    width: 100%;
-    height: 900px;
-    overflow: hidden;
-    border-radius: 8px;
-}
-
-.location-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
+/* 커뮤니티 섹션 */
 /* 커뮤니티 섹션 */
 .community-section {
     background: #ffffff;
-    padding: 100px 0;
+    padding: 160px 0;
     position: relative;
     z-index: 1;
 }
 
-.community-header {
-    text-align: center;
+.community-container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+/* 텍스트 영역 */
+.community-text {
     margin-bottom: 80px;
 }
 
-.community-header .section-title {
+.community-main-text {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.community-title-left {
+    font-family: 'Aboreto', serif;
     font-size: 120px;
+    font-weight: 400;
     line-height: 120px;
     letter-spacing: -6px;
-    margin-bottom: 40px;
+    color: #161616;
+    margin: 0;
+    text-align: left;
+}
+
+.community-title-right {
+    font-family: 'Aboreto', serif;
+    font-size: 120px;
+    font-weight: 400;
+    line-height: 120px;
+    letter-spacing: -6px;
+    color: #161616;
+    margin: 0;
+    text-align: right;
 }
 
 .community-description {
+    max-width: 438px;
+    margin-left: auto;
+}
+
+.community-description p {
     font-family: 'Pretendard Variable', sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 28px;
     letter-spacing: -0.4px;
     color: #161616;
-    max-width: 438px;
-    margin: 0 auto;
+    margin: 0;
 }
 
-.service-cards {
+/* 카드 영역 */
+.community-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
 }
 
-.service-card {
-    background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.community-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-}
-
-.card-image {
+.community-card-image {
+    position: relative;
     width: 100%;
-    height: 300px;
+    height: 620px;
     overflow: hidden;
 }
 
-.card-image img {
+.community-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.service-card:hover .card-image img {
-    transform: scale(1.05);
+.community-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #7C7262;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 24px;
 }
 
-.card-content {
-    padding: 30px;
+.community-card-overlay.active {
+    opacity: 1;
 }
 
-.card-content h3 {
+.community-card-detail-text {
+    text-align: left;
+}
+
+.community-card-detail-text p {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: -0.36px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.community-card-button-area {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    z-index: 10;
+}
+
+.community-card-button-area .icon-button__icon-img {
+    filter: brightness(0) invert(1); /* 아이콘 색상을 ffffff로 */
+}
+
+.community-card-title {
     font-family: 'Arsenal', sans-serif;
     font-size: 28px;
     font-weight: 400;
     line-height: 28px;
+    letter-spacing: 0;
     color: #161616;
-    margin-bottom: 20px;
+    margin: 0;
+    text-align: left;
+    text-transform: uppercase;
 }
 
-.card-content p {
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 25.2px;
-    letter-spacing: -0.36px;
-    color: #161616;
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .community-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .community-title-left,
+    .community-title-right {
+        font-size: 80px;
+        line-height: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .community-section {
+        padding: 80px 0;
+    }
+    
+    .community-container {
+        padding: 0 24px;
+    }
+    
+    .community-text {
+        margin-bottom: 60px;
+    }
+    
+    .community-main-text {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .community-title-left,
+    .community-title-right {
+        font-size: 60px;
+        line-height: 60px;
+        letter-spacing: -3px;
+        text-align: left;
+    }
+    
+    .community-description {
+        max-width: 100%;
+        margin-left: 0;
+    }
+    
+    .community-description p {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    
+    .community-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .community-card {
+        gap: 16px;
+    }
+    
+    .community-card-image {
+        height: 300px;
+    }
+    
+    .community-card-button-area {
+        bottom: 12px;
+        right: 12px;
+    }
+    
+    .community-card-title {
+        font-size: 24px;
+        line-height: 24px;
+    }
+    
+    .community-card-detail-text p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .community-card-image {
+        height: 250px;
+    }
+    
+    .community-card-button-area {
+        bottom: 8px;
+        right: 8px;
+    }
 }
 
 /* 연락처 섹션 */
 .contact-section {
     position: relative;
     height: 760px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    overflow: hidden;
     display: flex;
     align-items: center;
-    z-index: 1;
-    justify-content: center;
-    overflow: hidden;
+    justify-content: right;
 }
 
 .contact-background {
@@ -2019,10 +2118,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('images/contact-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.contact-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .contact-overlay {
@@ -2031,7 +2134,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(22, 22, 22, 0.7);
+    background: #161616;
+    z-index: 2;
 }
 
 .contact-gradient {
@@ -2040,16 +2144,22 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.5) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 39.9%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: 3;
 }
 
 .contact-content {
-    position: relative;
-    z-index: 2;
+    position: absolute; /* 섹션 우상단 고정 배치 */
+    top: 0;
+    right: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    padding: 48px 48px 0 0; /* 상단 48, 우측 48, 나머지 0 */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     text-align: right;
-    color: #ffffff;
-    max-width: 872px;
-    padding: 0 40px;
 }
 
 .contact-title {
@@ -2058,32 +2168,88 @@ body {
     font-weight: 400;
     line-height: 120px;
     letter-spacing: -6px;
-    color: #ffffff;
-    margin-bottom: 40px;
+    color: #FFFFFF;
+    margin: 0 0 32px 0;
+    text-align: right;
 }
 
 .contact-info {
-    max-width: 547px;
-    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-end;
 }
 
 .contact-address {
     font-family: 'Pretendard Variable', sans-serif;
     font-size: 24px;
     font-weight: 400;
-    line-height: 33.6px;
+    line-height: 34px;
     letter-spacing: -0.48px;
-    color: #ffffff;
-    margin-bottom: 20px;
+    color: #FFFFFF;
+    margin: 0;
+    text-align: left;
 }
 
 .contact-hours {
     font-family: 'Pretendard Variable', sans-serif;
     font-size: 24px;
     font-weight: 400;
-    line-height: 33.6px;
+    line-height: 34px;
     letter-spacing: -0.48px;
-    color: #ffffff;
+    color: #FFFFFF;
+    margin: 0;
+    text-align: left;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .contact-title {
+        font-size: 80px;
+        line-height: 80px;
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 20px;
+        line-height: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        height: 500px;
+    }
+    
+    .contact-content {
+        position: absolute; /* 모바일에서도 우상단 고정 */
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        padding: 48px 48px 0 0; /* 상단 48, 우측 48, 나머지 0 */
+        align-items: flex-end;
+        text-align: right;
+    }
+    
+    .contact-title {
+        font-size: 60px;
+        line-height: 60px;
+        letter-spacing: -3px;
+        margin-bottom: 24px;
+    }
+    
+    .contact-info {
+        align-items: center;
+        gap: 2px;
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 18px;
+        line-height: 26px;
+        text-align: center;
+    }
 }
 
 /* Footer 컴포넌트 - components.css와 동일한 스타일 */
@@ -2521,8 +2687,7 @@ body {
     }
     
     .hero-content,
-    .video-content,
-    .contact-content {
+    .video-content {
         padding: 0 20px;
     }
     
@@ -2625,10 +2790,6 @@ body {
         gap: 30px;
     }
     
-    .location-header {
-        flex-direction: column;
-        gap: 40px;
-    }
     
     /* Footer 반응형 스타일은 위의 footer 섹션에서 관리됨 */
 }

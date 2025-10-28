@@ -56,6 +56,11 @@ class IconButton {
     // 비활성화된 버튼은 무시
     if (button.disabled) return;
     
+    // nav 버튼은 focused/activated 효과 제거
+    if (button.classList.contains('icon-button--nav')) {
+      return;
+    }
+    
     // 커스텀 이벤트 발생
     const customEvent = new CustomEvent('iconButtonClick', {
       detail: {

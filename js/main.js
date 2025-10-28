@@ -30,6 +30,9 @@ function init() {
     
     // Back to Top 버튼 초기화
     initBackToTop();
+    
+    // Community Card 기능 초기화
+    initCommunityCard();
 }
 
 // 반응형 처리 함수
@@ -490,4 +493,54 @@ function initBackToTop() {
     });
     
     console.log('Back to Top 버튼 기능이 초기화되었습니다.');
+}
+
+// Community Card 기능 초기화
+function initCommunityCard() {
+    const cards = document.querySelectorAll('.community-card');
+    
+    if (cards.length === 0) {
+        console.log('Community Card를 찾을 수 없습니다.');
+        return;
+    }
+    
+    cards.forEach(card => {
+        const button = card.querySelector('[data-community-card]');
+        const overlay = card.querySelector('.community-card-overlay');
+        const plusIcon = card.querySelector('.icon-plus');
+        const minusIcon = card.querySelector('.icon-minus');
+        
+        if (button && overlay && plusIcon && minusIcon) {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // 현재 카드의 오버레이 상태 확인
+                const isCurrentlyActive = overlay.classList.contains('active');
+                
+                // 모든 오버레이를 먼저 닫기
+                document.querySelectorAll('.community-card-overlay').forEach(overlay => {
+                    overlay.classList.remove('active');
+                });
+                
+                // 모든 아이콘을 plus로 초기화
+                document.querySelectorAll('.icon-plus').forEach(icon => {
+                    icon.style.display = 'block';
+                });
+                document.querySelectorAll('.icon-minus').forEach(icon => {
+                    icon.style.display = 'none';
+                });
+                
+                // 현재 카드가 비활성 상태였다면 활성화, 활성 상태였다면 비활성화
+                if (!isCurrentlyActive) {
+                    overlay.classList.add('active');
+                    plusIcon.style.display = 'none';
+                    minusIcon.style.display = 'block';
+                }
+                
+                console.log('Community Card 오버레이가 토글되었습니다.');
+            });
+        }
+    });
+    
+    console.log('Community Card 기능이 초기화되었습니다.');
 }

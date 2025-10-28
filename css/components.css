@@ -2727,8 +2727,18 @@
 }
 
 .icon-button:focus {
-  outline: 2px solid #7C7262;
-  outline-offset: 2px;
+  outline: none;
+}
+
+/* Nav 버튼에 대한 추가 스트로크 제거 */
+.icon-button--nav,
+.icon-button--nav:focus,
+.icon-button--nav:active,
+.icon-button--nav:hover,
+.icon-button--nav:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .icon-button:disabled {
@@ -2764,10 +2774,30 @@
   background: rgba(22, 22, 22, 0.15);
   backdrop-filter: blur(4px);
   transition: background-color 0.3s ease;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .icon-button--medium:hover {
   background: rgba(22, 22, 22, 0.2);
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.icon-button--medium:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.icon-button--medium:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.icon-button--medium:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .icon-button--medium:hover .icon-button__icon-img {
@@ -3971,36 +4001,51 @@
   border-radius: 0; /* 라운드값 제거 */
 }
 
+.unit-1-image-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .unit-1-main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.unit-1-pagination {
+.unit-1-main-image.active {
+  opacity: 1;
+}
+
+/* 공통 Pagination 컴포넌트 */
+.unit-pagination {
   position: absolute;
-  bottom: 42px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.unit-1-pagination-dots {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  gap: 8px;
+  z-index: 10;
 }
 
-.unit-1-dot {
-  width: 10px;
-  height: 10px;
+.unit-pagination-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.unit-1-dot--active {
-  background-color: #161616;
+.unit-pagination-dot.active {
+  background: #161616;
 }
+
 
 .unit-1-nav {
   position: absolute;
@@ -4013,26 +4058,53 @@
   padding: 0 32px;
 }
 
-.unit-1-nav-button {
+/* Nav 버튼 스타일 - Icon Button 컴포넌트 기반 */
+.icon-button--nav {
   width: 48px;
   height: 48px;
-  background-color: transparent;
+  background: transparent;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease;
+  border-radius: 50%;
+  outline: none !important; /* 스트로크 스타일 강제 제거 */
+  box-shadow: none !important; /* 박스 섀도우 제거 */
 }
 
-.unit-1-nav-button:hover {
+.icon-button--nav:hover {
   opacity: 0.7;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.unit-1-nav-button img {
-  width: 24px;
-  height: 24px;
+.icon-button--nav:focus {
+  outline: none !important; /* 포커스 시 스트로크 강제 제거 */
+  box-shadow: none !important;
+}
+
+.icon-button--nav:active {
+  outline: none !important; /* 클릭 시 스트로크 강제 제거 */
+  box-shadow: none !important;
+}
+
+.icon-button--nav:focus-visible {
+  outline: none !important; /* 포커스 가시성 스트로크 제거 */
+  box-shadow: none !important;
+}
+
+.icon-button--nav .icon-button__icon-img {
+  width: 48px;
+  height: 48px;
   object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+/* Nav 버튼 아이콘 색상 통일 */
+.icon-button--nav .icon-button__icon-img {
+  filter: brightness(0) invert(0); /* #161616 색상으로 통일 */
 }
 
 /* Unit 2 - Foresty Type */
@@ -4071,36 +4143,28 @@
   border-radius: 0; /* 라운드값 제거 */
 }
 
+.unit-2-image-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .unit-2-main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.unit-2-pagination {
-  position: absolute;
-  bottom: 42px;
-  left: 50%;
-  transform: translateX(-50%);
+.unit-2-main-image.active {
+  opacity: 1;
 }
 
-.unit-2-pagination-dots {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
 
-.unit-2-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-}
-
-.unit-2-dot--active {
-  background-color: #161616;
-}
 
 .unit-2-nav {
   position: absolute;
@@ -4113,27 +4177,6 @@
   padding: 0 32px;
 }
 
-.unit-2-nav-button {
-  width: 48px;
-  height: 48px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s ease;
-}
-
-.unit-2-nav-button:hover {
-  opacity: 0.7;
-}
-
-.unit-2-nav-button img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
 
 .unit-2-text {
   padding: 48px 48px 48px 48px; /* 상하 패딩 48px 추가 */

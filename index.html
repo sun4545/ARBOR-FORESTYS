@@ -355,26 +355,35 @@
                 <!-- 이미지 영역 -->
                 <div class="unit-1-image">
                     <div class="unit-1-image-wrapper">
-                        <img src="images/gallery/list-image-02-.jpg" alt="Arbor Type" class="unit-1-main-image">
+                        <div class="unit-1-image-slider">
+                            <img src="images/gallery/unit1-image-01.jpg" alt="Arbor Type 1" class="unit-1-main-image active">
+                            <img src="images/gallery/unit1-image-02.jpg" alt="Arbor Type 2" class="unit-1-main-image">
+                            <img src="images/gallery/unit1-image-03.jpg" alt="Arbor Type 3" class="unit-1-main-image">
+                            <img src="images/gallery/unit1-image-04.jpg" alt="Arbor Type 4" class="unit-1-main-image">
+                            <img src="images/gallery/unit1-image-05.jpg" alt="Arbor Type 5" class="unit-1-main-image">
+                        </div>
                         
                         <!-- 페이지네이션 -->
-                        <div class="unit-1-pagination">
-                            <div class="unit-1-pagination-dots">
-                                <span class="unit-1-dot unit-1-dot--active"></span>
-                                <span class="unit-1-dot"></span>
-                                <span class="unit-1-dot"></span>
-                                <span class="unit-1-dot"></span>
-                                <span class="unit-1-dot"></span>
-                            </div>
+                        <div class="unit-pagination">
+                            <span class="unit-pagination-dot active" data-slide="0"></span>
+                            <span class="unit-pagination-dot" data-slide="1"></span>
+                            <span class="unit-pagination-dot" data-slide="2"></span>
+                            <span class="unit-pagination-dot" data-slide="3"></span>
+                            <span class="unit-pagination-dot" data-slide="4"></span>
                         </div>
+                        
                         
                         <!-- 이전/다음 버튼 -->
                         <div class="unit-1-nav">
-                            <button class="unit-1-nav-button unit-1-nav-button--prev">
-                                <img src="images/icons/Icon:24/Name=Prev.svg" alt="Previous">
+                            <button class="icon-button icon-button--nav" data-icon-button="unit-1-prev" aria-label="이전">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Prev.svg" alt="Previous" class="icon-button__icon-img">
+                                </div>
                             </button>
-                            <button class="unit-1-nav-button unit-1-nav-button--next">
-                                <img src="images/icons/Icon:24/Name=Next.svg" alt="Next">
+                            <button class="icon-button icon-button--nav" data-icon-button="unit-1-next" aria-label="다음">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Next.svg" alt="Next" class="icon-button__icon-img">
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -388,26 +397,35 @@
                 <!-- 이미지 영역 -->
                 <div class="unit-2-image">
                     <div class="unit-2-image-wrapper">
-                        <img src="images/gallery/list-image-01-.jpg" alt="Foresty Type" class="unit-2-main-image">
+                        <div class="unit-2-image-slider">
+                            <img src="images/gallery/unit2-image-01.jpg" alt="Foresty Type 1" class="unit-2-main-image active">
+                            <img src="images/gallery/unit2-image-02.jpg" alt="Foresty Type 2" class="unit-2-main-image">
+                            <img src="images/gallery/unit2-image-03.jpg" alt="Foresty Type 3" class="unit-2-main-image">
+                            <img src="images/gallery/unit2-image-04.jpg" alt="Foresty Type 4" class="unit-2-main-image">
+                            <img src="images/gallery/unit2-image-05.jpg" alt="Foresty Type 5" class="unit-2-main-image">
+                        </div>
                         
                         <!-- 페이지네이션 -->
-                        <div class="unit-2-pagination">
-                            <div class="unit-2-pagination-dots">
-                                <span class="unit-2-dot unit-2-dot--active"></span>
-                                <span class="unit-2-dot"></span>
-                                <span class="unit-2-dot"></span>
-                                <span class="unit-2-dot"></span>
-                                <span class="unit-2-dot"></span>
-                            </div>
+                        <div class="unit-pagination">
+                            <span class="unit-pagination-dot active" data-slide="0"></span>
+                            <span class="unit-pagination-dot" data-slide="1"></span>
+                            <span class="unit-pagination-dot" data-slide="2"></span>
+                            <span class="unit-pagination-dot" data-slide="3"></span>
+                            <span class="unit-pagination-dot" data-slide="4"></span>
                         </div>
+                        
                         
                         <!-- 이전/다음 버튼 -->
                         <div class="unit-2-nav">
-                            <button class="unit-2-nav-button unit-2-nav-button--prev">
-                                <img src="images/icons/Icon:24/Name=Prev.svg" alt="Previous">
+                            <button class="icon-button icon-button--nav" data-icon-button="unit-2-prev" aria-label="이전">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Prev.svg" alt="Previous" class="icon-button__icon-img">
+                                </div>
                             </button>
-                            <button class="unit-2-nav-button unit-2-nav-button--next">
-                                <img src="images/icons/Icon:24/Name=Next.svg" alt="Next">
+                            <button class="icon-button icon-button--nav" data-icon-button="unit-2-next" aria-label="다음">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Next.svg" alt="Next" class="icon-button__icon-img">
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -467,47 +485,101 @@
         </div>
     </section>
 
-    <!-- 위치 섹션 -->
-    <section class="location-section">
-        <div class="container">
-            <div class="location-content">
-                <div class="location-text">
-                    <h2 class="section-title">Location</h2>
-                    <p class="section-description">
-                        서울의 중심가에 위치한 아르보 포레스티는 접근성과 편의성을 모두 갖춘 최적의 입지를 자랑합니다.
-                    </p>
-                </div>
-                <div class="location-image">
-                    <img src="images/location/location-image.jpg" alt="Location">
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- 커뮤니티 & 서비스 섹션 -->
     <section class="community-section">
-        <div class="container">
-            <h2 class="section-title">Community & Service</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <img src="images/services/wellness-zone.jpg" alt="Wellness Zone">
-                    <h3 class="service-title">Wellness Zone</h3>
-                    <p class="service-description">건강한 라이프스타일을 위한 웰니스 시설</p>
+        <div class="community-container">
+            <!-- 텍스트 영역 -->
+            <div class="community-text">
+                <div class="community-main-text">
+                    <h2 class="community-title-left">Community<br>Service</h2>
+                    <h2 class="community-title-right">&</h2>
                 </div>
-                <div class="service-card">
-                    <img src="images/services/social-lounge.jpg" alt="Social Lounge">
-                    <h3 class="service-title">Social Lounge</h3>
-                    <p class="service-description">주민들을 위한 프리미엄 소셜 라운지</p>
+                <div class="community-description">
+                    <p>아르보 포레스티는 단순한 거주 공간을 넘어, 당신의 삶을 더욱 풍요롭게 하는 특별한 경험을 선사합니다. 오직 당신의 취향만을 위한 시간을 보낼 수 있도록 고품격 커뮤니티 공간과 최상의 서비스가 당신을 기다립니다.</p>
                 </div>
-                <div class="service-card">
-                    <img src="images/services/concierge.jpg" alt="Concierge">
-                    <h3 class="service-title">Concierge</h3>
-                    <p class="service-description">24시간 컨시어지 서비스</p>
+            </div>
+            
+            <!-- 카드 영역 -->
+            <div class="community-cards">
+                <div class="community-card">
+                    <div class="community-card-image">
+                        <img src="images/community/Image/Property 1=1.jpg" alt="Wellness Zone">
+                        <div class="community-card-overlay">
+                            <div class="community-card-detail-text">
+                                <p>도심의 소음으로부터 벗어나 온전한 휴식을 누릴 수 있는 공간입니다. 인피니티 풀에서는 계절의 변화를 느끼며 여유로운 수영을, 프라이빗 사우나와 릴렉세이션 룸에서는 지친 몸의 피로를 완벽하게 해소할 수 있습니다.</p>
+                            </div>
+                        </div>
+                        <div class="community-card-button-area">
+                            <button class="icon-button icon-button--medium" data-community-card="wellness" aria-label="상세 정보">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Plus.svg" alt="Plus" class="icon-button__icon-img icon-plus">
+                                    <img src="images/icons/Icon:24/Name=Minus.svg" alt="Minus" class="icon-button__icon-img icon-minus" style="display: none;">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="community-card-title">Wellness Zone</h3>
                 </div>
-                <div class="service-card">
-                    <img src="images/services/personal-studio.jpg" alt="Personal Studio">
-                    <h3 class="service-title">Personal Studio</h3>
-                    <p class="service-description">개인 맞춤형 스튜디오 공간</p>
+                
+                <div class="community-card">
+                    <div class="community-card-image">
+                        <img src="images/community/Image/Property 1=2.jpg" alt="Social Lounge">
+                        <div class="community-card-overlay">
+                            <div class="community-card-detail-text">
+                                <p>도심의 소음으로부터 벗어나 온전한 휴식을 누릴 수 있는 공간입니다. 인피니티 풀에서는 계절의 변화를 느끼며 여유로운 수영을, 프라이빗 사우나와 릴렉세이션 룸에서는 지친 몸의 피로를 완벽하게 해소할 수 있습니다.</p>
+                            </div>
+                        </div>
+                        <div class="community-card-button-area">
+                            <button class="icon-button icon-button--medium" data-community-card="social" aria-label="상세 정보">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Plus.svg" alt="Plus" class="icon-button__icon-img icon-plus">
+                                    <img src="images/icons/Icon:24/Name=Minus.svg" alt="Minus" class="icon-button__icon-img icon-minus" style="display: none;">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="community-card-title">Social Lounge</h3>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-card-image">
+                        <img src="images/community/Image/Property 1=3.jpg" alt="Concierge Service">
+                        <div class="community-card-overlay">
+                            <div class="community-card-detail-text">
+                                <p>도심의 소음으로부터 벗어나 온전한 휴식을 누릴 수 있는 공간입니다. 인피니티 풀에서는 계절의 변화를 느끼며 여유로운 수영을, 프라이빗 사우나와 릴렉세이션 룸에서는 지친 몸의 피로를 완벽하게 해소할 수 있습니다.</p>
+                            </div>
+                        </div>
+                        <div class="community-card-button-area">
+                            <button class="icon-button icon-button--medium" data-community-card="concierge" aria-label="상세 정보">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Plus.svg" alt="Plus" class="icon-button__icon-img icon-plus">
+                                    <img src="images/icons/Icon:24/Name=Minus.svg" alt="Minus" class="icon-button__icon-img icon-minus" style="display: none;">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="community-card-title">Concierge Service</h3>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-card-image">
+                        <img src="images/community/Image/Property 1=4.jpg" alt="Personal Studio">
+                        <div class="community-card-overlay">
+                            <div class="community-card-detail-text">
+                                <p>도심의 소음으로부터 벗어나 온전한 휴식을 누릴 수 있는 공간입니다. 인피니티 풀에서는 계절의 변화를 느끼며 여유로운 수영을, 프라이빗 사우나와 릴렉세이션 룸에서는 지친 몸의 피로를 완벽하게 해소할 수 있습니다.</p>
+                            </div>
+                        </div>
+                        <div class="community-card-button-area">
+                            <button class="icon-button icon-button--medium" data-community-card="studio" aria-label="상세 정보">
+                                <div class="icon-button__icon">
+                                    <img src="images/icons/Icon:24/Name=Plus.svg" alt="Plus" class="icon-button__icon-img icon-plus">
+                                    <img src="images/icons/Icon:24/Name=Minus.svg" alt="Minus" class="icon-button__icon-img icon-minus" style="display: none;">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="community-card-title">Personal Studio</h3>
                 </div>
             </div>
         </div>
@@ -515,15 +587,16 @@
 
     <!-- 연락처 섹션 -->
     <section class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Contact</h2>
+        <div class="contact-background">
+            <img src="images/background/contact-image.jpg" alt="Arbor Gallery" class="contact-image">
+            <div class="contact-overlay"></div>
+            <div class="contact-gradient"></div>
+        </div>
+        <div class="contact-content">
+            <h2 class="contact-title">Arbor Gallery</h2>
             <div class="contact-info">
-                <p class="contact-text">아르보 포레스티 갤러리에서 더 자세한 정보를 확인하실 수 있습니다.</p>
-                <div class="contact-details">
-                    <p>주소: 서울특별시 서초구 신반포로49길 12, 아르보포레스티갤러리</p>
-                    <p>전화: 546-1520</p>
-                    <p>이메일: hello@thegrap.com</p>
-                </div>
+                <p class="contact-address">서울특별시 서초구 신반포로49길 12, 아르보포레스티갤러리</p>
+                <p class="contact-hours">WEEKDAYS  09:00-20:00</p>
             </div>
         </div>
     </section>
@@ -604,6 +677,7 @@
 
     <!-- JavaScript -->
     <script src="js/components/icon-button.js"></script>
+    <script src="js/components/unit-slider.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
