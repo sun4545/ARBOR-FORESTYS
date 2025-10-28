@@ -51,6 +51,8 @@ function initNavbarScroll() {
     const navbar = document.querySelector('.navbar');
     let lastScrollTop = 0;
     let isScrolling = false;
+    let scrollUpCount = 0; // 스크롤업 카운터
+    let scrollTimeout; // 카운터 리셋을 위한 타이머
     
     if (!navbar) return;
     
@@ -60,6 +62,7 @@ function initNavbarScroll() {
             window.requestAnimationFrame(function() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const scrollThreshold = 100; // 100px 이상 스크롤 시 배경 적용
+                const minScrollDistance = 10; // 최소 스크롤 거리
                 
                 // 스크롤 위치에 따른 배경 적용
                 if (scrollTop > scrollThreshold) {
@@ -68,15 +71,30 @@ function initNavbarScroll() {
                     navbar.classList.remove('scrolled');
                 }
                 
-                // 스크롤 방향 감지
+                // 스크롤 방향 감지 및 카운터 로직
                 if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-                    // 스크롤 다운 - navbar 숨기기
+                    // 스크롤 다운 - navbar 숨기기, 카운터 리셋
                     navbar.classList.add('scroll-down');
                     navbar.classList.remove('scroll-up');
-                } else {
-                    // 스크롤 업 - navbar 보이기
-                    navbar.classList.add('scroll-up');
-                    navbar.classList.remove('scroll-down');
+                    scrollUpCount = 0; // 다운 스크롤 시 카운터 리셋
+                    clearTimeout(scrollTimeout); // 타이머 클리어
+                } else if (scrollTop < lastScrollTop && 
+                          (lastScrollTop - scrollTop) >= minScrollDistance && 
+                          scrollTop > scrollThreshold) {
+                    // 스크롤 업 - 카운터 증가 (최소 거리 이상 스크롤해야 카운트)
+                    scrollUpCount++;
+                    
+                    if (scrollUpCount >= 2) {
+                        // 2번 이상 스크롤업 시에만 navbar 보이기
+                        navbar.classList.add('scroll-up');
+                        navbar.classList.remove('scroll-down');
+                    }
+                    
+                    // 일정 시간 후 카운터 자동 리셋
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        scrollUpCount = 0;
+                    }, 2000); // 2초 후 카운터 리셋
                 }
                 
                 lastScrollTop = scrollTop;
@@ -86,7 +104,7 @@ function initNavbarScroll() {
         isScrolling = true;
     });
     
-    console.log('Navbar 스크롤 기능이 초기화되었습니다.');
+    console.log('Navbar 스크롤 기능이 초기화되었습니다. (2번 스크롤업 필요)');
 }
 
 // Hero 캐러셀 기능 초기화
