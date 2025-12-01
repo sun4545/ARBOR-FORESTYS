@@ -371,43 +371,16 @@
     overflow: hidden;
 }
 
-.contact-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('images/contact-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.contact-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(22, 22, 22, 0.7);
-}
-
-.contact-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.5) 100%);
-}
+/* contact 관련 스타일은 main.css에서 통일 관리 */
+/* components.css의 contact 스타일은 제거됨 - main.css 참조 */
 
 .contact-content {
     position: relative;
     z-index: 2;
     text-align: right;
     color: #ffffff;
-    max-width: 872px;
-    padding: 0 40px;
+    width: 100%; /* 가로 100% 배치 */
+    padding: 48px; /* 좌우상하 패딩 48px */
 }
 
 .contact-title {
@@ -432,7 +405,7 @@
     line-height: 33.6px;
     letter-spacing: -0.48px;
     color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 0; /* 하단 마진 0 */
 }
 
 .contact-hours {
@@ -2826,6 +2799,17 @@
   filter: brightness(0) invert(1);
 }
 
+/* active 상태를 default와 동일하게 유지 (pressed/activated/clicked 효과 제거) */
+.icon-button--large:active {
+  background: #FFFFFF; /* default 상태와 동일 */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.icon-button--large:active .icon-button__icon-img {
+  filter: none; /* default 상태와 동일 */
+}
+
 .icon-button--large .icon-button__icon-img {
   width: 24px;
   height: 24px;
@@ -2840,6 +2824,15 @@
 
 .icon-button--large.icon-button--hover {
   background: #7C7262;
+}
+
+/* hover 상태에서 active 시에도 hover 유지 */
+.icon-button--large.icon-button--hover:active {
+  background: #7C7262; /* hover 상태 유지 */
+}
+
+.icon-button--large.icon-button--hover:active .icon-button__icon-img {
+  filter: brightness(0) invert(1); /* hover 상태 유지 */
 }
 
 /* Icon Button 그룹 */
@@ -4476,5 +4469,183 @@
   .unit-2-button-label {
     font-size: 14px;
     line-height: 20px;
+  }
+}
+
+/* ========================================
+   Unit Floor Popup Modal (평면 정보 팝업)
+   ======================================== */
+
+/* 모달 기본 스타일 */
+.unit-floor-popup-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.unit-floor-popup-modal.active {
+  display: flex;
+}
+
+/* 오버레이 배경 */
+.unit-floor-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* #000000 50% 투명도 */
+  z-index: 10001;
+}
+
+/* 팝업 콘텐츠 영역 */
+.unit-floor-popup-content {
+  position: relative;
+  width: 1200px;
+  height: 700px;
+  background: #ffffff;
+  z-index: 10002;
+  padding: 48px;
+  padding-bottom: 100px; /* 닫기 버튼 공간 확보 (24px 간격 + 60px 버튼 높이 + 여유 16px) */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* 타이틀 영역 */
+.unit-floor-popup-title-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.unit-floor-popup-title-main {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 33.6px;
+  letter-spacing: -0.48px;
+  color: #161616;
+  margin: 0;
+  text-align: left;
+}
+
+.unit-floor-popup-title-sub {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+  letter-spacing: -0.32px;
+  color: #161616;
+  margin: 0;
+  text-align: left;
+}
+
+/* 이미지 영역 */
+.unit-floor-popup-image-area {
+  flex: 1;
+  width: 1104px;
+  height: 566px;
+  overflow: hidden;
+  position: relative;
+}
+
+.unit-floor-popup-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* 비율 고정된 채 fill로 표시 */
+}
+
+/* 닫기 버튼 - 팝업창 바깥쪽 중앙 아래 배치 */
+.unit-floor-popup-close {
+  position: absolute;
+  bottom: -84px; /* 팝업창 아래 24px 간격 + 버튼 높이 60px = 84px */
+  left: 50%;
+  transform: translateX(-50%); /* 중앙 정렬 */
+  width: 60px;
+  height: 60px;
+  background: rgba(22, 22, 22, 0.15);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10003;
+  transition: background-color 0.3s ease;
+  padding: 0;
+}
+
+.unit-floor-popup-close:hover {
+  background: rgba(22, 22, 22, 0.2);
+}
+
+.unit-floor-popup-close-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* 아이콘 색상을 #ffffff로 변경 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+  .unit-floor-popup-content {
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    min-height: 600px;
+  }
+
+  .unit-floor-popup-image-area {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .unit-floor-popup-content {
+    width: 95%;
+    padding: 32px;
+    padding-bottom: 90px; /* 닫기 버튼 공간 확보 (24px 간격 + 50px 버튼 높이 + 여유 16px) */
+    min-height: 500px;
+  }
+
+  .unit-floor-popup-title-main {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .unit-floor-popup-title-sub {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .unit-floor-popup-image-area {
+    min-height: 300px;
+  }
+
+  .unit-floor-popup-close {
+    bottom: -74px; /* 팝업창 아래 24px 간격 + 버튼 높이 50px = 74px */
+    left: 50%;
+    transform: translateX(-50%); /* 중앙 정렬 */
+    width: 50px;
+    height: 50px;
+  }
+
+  .unit-floor-popup-close-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); /* 아이콘 색상을 #ffffff로 변경 */
   }
 }

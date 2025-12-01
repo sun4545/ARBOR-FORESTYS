@@ -61,6 +61,19 @@ class IconButton {
       return;
     }
     
+    // icon-button--large 버튼의 경우 pressed/activated/clicked 클래스 제거
+    // 클릭 후에도 default나 hover 상태만 유지
+    if (button.classList.contains('icon-button--large')) {
+      // pressed, activated, clicked 클래스 제거
+      button.classList.remove('icon-button--pressed');
+      button.classList.remove('icon-button--activated');
+      button.classList.remove('icon-button--clicked');
+      // active 상태를 즉시 해제하여 default/hover 상태로 복귀
+      setTimeout(() => {
+        button.blur(); // 포커스 제거로 active 상태 해제
+      }, 0);
+    }
+    
     // 커스텀 이벤트 발생
     const customEvent = new CustomEvent('iconButtonClick', {
       detail: {

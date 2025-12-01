@@ -33,6 +33,9 @@ function init() {
     
     // Community Card 기능 초기화
     initCommunityCard();
+    
+    // 평면 정보 모달 팝업 초기화
+    initUnitFloorPopup();
 }
 
 // 반응형 처리 함수
@@ -543,4 +546,72 @@ function initCommunityCard() {
     });
     
     console.log('Community Card 기능이 초기화되었습니다.');
+}
+
+// 평면 정보 모달 팝업 초기화
+function initUnitFloorPopup() {
+    const modal = document.getElementById('unitFloorPopupModal');
+    const overlay = modal?.querySelector('.unit-floor-popup-overlay');
+    const closeButton = modal?.querySelector('.unit-floor-popup-close');
+    const floorButtons = document.querySelectorAll('[data-icon-button*="floor"]');
+    
+    if (!modal) {
+        console.log('평면 정보 모달을 찾을 수 없습니다.');
+        return;
+    }
+    
+    // 평면 정보 버튼 클릭 시 모달 열기
+    floorButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 모달 열기
+            modal.classList.add('active');
+            // body 스크롤 방지
+            document.body.style.overflow = 'hidden';
+            
+            console.log('평면 정보 모달이 열렸습니다.');
+        });
+    });
+    
+    // 오버레이 클릭 시 모달 닫기
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            console.log('평면 정보 모달이 닫혔습니다.');
+        });
+    }
+    
+    // 닫기 버튼 클릭 시 모달 닫기
+    if (closeButton) {
+        closeButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            console.log('평면 정보 모달이 닫혔습니다.');
+        });
+    }
+    
+    // ESC 키로 모달 닫기
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            console.log('ESC 키로 평면 정보 모달이 닫혔습니다.');
+        }
+    });
+    
+    // 모달 콘텐츠 클릭 시 이벤트 전파 방지 (오버레이 클릭만 닫기)
+    const popupContent = modal.querySelector('.unit-floor-popup-content');
+    if (popupContent) {
+        popupContent.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+    
+    console.log('평면 정보 모달 팝업 기능이 초기화되었습니다.');
 }
