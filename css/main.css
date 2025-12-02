@@ -1082,8 +1082,47 @@ body {
     z-index: 1;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 1200px) {
+/* ============================================
+   반응형 디자인 (규칙 기반 재구성)
+   ============================================
+   브레이크포인트:
+   - 태블릿: 769px - 1024px
+   - 모바일: 481px - 768px  
+   - 작은 모바일: 480px 이하
+   ============================================ */
+
+/* 태블릿 (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Container */
+    .container {
+        padding: 0 32px;
+    }
+    
+    .navbar-container {
+        padding: 0 32px;
+    }
+    
+    /* Navbar */
+    .menu-item {
+        font-size: 20px;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        min-height: 800px;
+    }
+    
+    .hero-title {
+        font-size: 160px;
+        line-height: 144px;
+    }
+    
+    .hero-subtitle {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    
+    /* Brand Story Section 01 */
     .brand-story-01-container {
         padding: 0 32px;
     }
@@ -1093,13 +1132,17 @@ body {
         line-height: 26px;
     }
     
-    /* 1200px 이하: 간격 90px로 조정 */
-    .brand-story-01-image-list {
-        gap: 90px;
-        padding: 0 32px 0 32px; /* 좌우 32px 마진 */
+    .brand-story-01-scroll-container {
+        flex: 0 0 550px;
+        height: 550px;
     }
     
-    /* 반응형에서도 각 이미지의 비율 유지 (75% 축소) */
+    .brand-story-01-image-list {
+        gap: 80px;
+        padding: 0 32px;
+    }
+    
+    /* 이미지 크기 75%로 축소 (비율 유지) */
     .brand-story-01-image-item--1 .brand-story-01-image {
         width: 398px;
         height: 285px;
@@ -1151,116 +1194,209 @@ body {
     }
     
     .brand-story-01-main-title {
-        font-size: 96px; /* 1200px 이하에서 80% 크기 */
+        font-size: 96px;
         line-height: 96px;
     }
     
-    /* 로케이션 요약 섹션 반응형 - 1200px 이하 */
-    .location-summary-text {
-        padding: 120px 0 60px 0; /* 상하 패딩 축소 */
-    }
-    
-    .location-summary-content {
-        flex-direction: column; /* 세로 정렬 */
-        gap: clamp(24px, 4vw, 60px); /* 최소 간격 24px 유지, 반응형 처리 */
-    }
-    
-    .location-summary-title {
-        font-size: 96px; /* 1200px 이하 크기 */
+    /* Brand Story Section 02 */
+    .brand-story-02-main-title {
+        font-size: 96px;
         line-height: 96px;
-        letter-spacing: -4.8px;
     }
     
-    .location-summary-description {
-        font-size: 18px; /* 1200px 이하 크기 */
-        line-height: 25.2px;
-        letter-spacing: -0.36px;
+    .brand-story-02-description {
+        font-size: 18px;
+        line-height: 26px;
     }
     
-    .location-summary-image {
-        height: 720px; /* 1200px 이하 높이 축소 */
-    }
-    
-    /* 브랜드 스토리 섹션 03 반응형 - 1200px 이하 */
+    /* Brand Story Section 03 */
     .brand-story-section-03 {
-        padding: 120px 0; /* 상하 패딩 축소 */
+        padding: 120px 0;
     }
     
     .brand-story-03-container {
         padding: 0 32px;
     }
     
-    .brand-story-03-text-wrapper {
-        gap: 50px; /* 간격 축소 */
-    }
-    
     .brand-story-03-quote {
-        font-size: 56px; /* 1200px 이하 크기 */
-        line-height: 61.6px;
-        letter-spacing: -2.8px;
+        font-size: 58px;
+        line-height: 64px;
     }
     
     .brand-story-03-description {
-        font-size: 20px; /* 1200px 이하 크기 */
+        font-size: 20px;
         line-height: 28px;
-        letter-spacing: -0.4px;
     }
     
-    .brand-story-03-author {
-        font-size: 18px; /* 1200px 이하 크기 */
-        line-height: 18px;
+    /* Location Summary - 레이아웃 재배치 */
+    .location-summary-container {
+        padding: 0 32px;
     }
     
-    /* 혜택 섹션 반응형 - 1200px 이하 */
+    .location-summary-text {
+        padding: 100px 0 50px 0;
+    }
+    
+    .location-summary-content {
+        flex-direction: column; /* 세로로 쌓기 */
+        gap: 32px;
+        align-items: flex-start;
+    }
+    
+    .location-summary-title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .location-summary-description {
+        font-size: 18px;
+        line-height: 25px;
+        max-width: 100%;
+    }
+    
+    .location-summary-image {
+        height: 600px;
+    }
+    
+    /* Benefit Section - 레이아웃 재배치 */
     .benefit-container {
-        flex-direction: column; /* 텍스트가 상단, 이미지가 하단에 배치 */
-        padding: 0; /* 좌우 패딩 제거 */
-        gap: 60px;
-    }
-    
-    /* 1200px 이하에서 이미지 영역이 좌우 패딩 없이 풀 너비로 표시 */
-    .benefit-image-area {
-        padding: 0; /* 이미지 영역 좌우 패딩 제거 */
+        flex-direction: column; /* 텍스트 위, 이미지 아래 */
+        padding: 0;
+        gap: 50px;
     }
     
     .benefit-text-area {
-        padding: 80px 32px 48px 32px; /* 텍스트 영역 좌우 패딩 추가 */
+        padding: 80px 32px 40px 32px;
+        order: 1;
+    }
+    
+    .benefit-image-area {
+        order: 2;
+        height: 500px;
     }
     
     .benefit-main-title {
-        font-size: 80px;
-        line-height: 80px;
-        letter-spacing: -4px;
-        margin-bottom: 80px;
+        font-size: 96px;
+        line-height: 96px;
     }
     
     .benefit-subtitle {
-        font-size: 24px; /* 1200px 이하 크기 조정 */
-        line-height: 28.8px;
-        letter-spacing: -0.48px;
+        font-size: 24px;
+        line-height: 29px;
     }
     
     .benefit-description {
         font-size: 20px;
         line-height: 28px;
-        letter-spacing: -0.4px;
+    }
+    
+    /* Community Section - 그리드 재배치 */
+    .community-container {
+        padding: 0 32px;
+    }
+    
+    .community-title-left,
+    .community-title-right {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .community-cards {
+        grid-template-columns: repeat(2, 1fr); /* 4열 -> 2열 */
+        gap: 20px;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+        height: 600px;
+    }
+    
+    .contact-content {
+        padding: 40px 32px;
+        align-items: flex-end; /* 우측 정렬 유지 */
+    }
+    
+    .contact-title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    
+    /* Video Section */
+    .brand-video-section {
+        height: 800px;
+    }
+    
+    .video-title {
+        font-size: 96px;
+        line-height: 96px;
     }
 }
 
-@media (max-width: 768px) {
-    .brand-story-section-01 {
+/* 모바일 (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* Container */
+    .container {
+        padding: 0 24px;
+    }
+    
+    .navbar-container {
+        padding: 0 24px;
+    }
+    
+    /* Navbar */
+    .navbar {
         height: auto;
-        min-height: 800px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+    
+    .navbar-menu {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    
+    .menu-item {
+        font-size: 20px;
+    }
+    
+    .logo {
+        width: 100px;
+        height: 50px;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        min-height: 600px;
+    }
+    
+    .hero-title {
+        font-size: 120px;
+        line-height: 108px;
+    }
+    
+    .hero-subtitle {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    /* Brand Story Section 01 */
+    .brand-story-section-01 {
+        min-height: auto;
+        padding-top: 80px;
+        padding-bottom: 40px;
     }
     
     .brand-story-01-container {
-        padding: 0 20px;
+        padding: 0 24px;
         gap: 32px;
-    }
-    
-    .brand-story-01-scroll-container {
-        flex: 0 0 500px; /* 모바일에서 높이 고정 */
-        height: 500px; /* 모바일에서 높이 조정 */
+        min-height: auto;
     }
     
     .brand-story-01-header {
@@ -1273,96 +1409,17 @@ body {
         max-width: 100%;
     }
     
-    /* 768px 이하: 간격 60px로 조정 */
+    .brand-story-01-scroll-container {
+        flex: 0 0 400px;
+        height: 400px;
+    }
+    
     .brand-story-01-image-list {
         gap: 60px;
-        padding: 0 24px 0 24px; /* 좌우 24px 마진 */
-    }
-    
-    /* 브랜드 스토리 섹션 02 반응형 */
-    .brand-story-section-02 {
-        height: 100vh; /* 모바일 뷰포트 높이에 맞춤 */
-    }
-    
-    .brand-story-02-text-wrapper {
-        padding: 64px 24px; /* 상하 패딩 64px 유지 */
-        gap: 0; /* gap 제거 */
-    }
-    
-    .brand-story-02-main-title {
-        font-size: 64px;
-        line-height: 64px;
-        letter-spacing: -3px;
-    }
-    
-    .brand-story-02-description {
-        font-size: 18px;
-        line-height: 26px;
-        max-width: 100%;
-    }
-    
-    /* 로케이션 요약 섹션 반응형 - 768px 이하 */
-    .location-summary-container {
         padding: 0 24px;
     }
     
-    .location-summary-text {
-        padding: 80px 0 40px 0; /* 상하 패딩 축소 */
-    }
-    
-    .location-summary-content {
-        flex-direction: column; /* 세로 정렬 */
-        gap: clamp(24px, 3vw, 40px); /* 최소 간격 24px 유지, 반응형 처리 */
-    }
-    
-    .location-summary-title {
-        font-size: 64px; /* 모바일 크기 */
-        line-height: 64px;
-        letter-spacing: -3.2px;
-    }
-    
-    .location-summary-description {
-        font-size: 16px; /* 모바일 크기 */
-        line-height: 22.4px;
-        letter-spacing: -0.32px;
-        max-width: 100%;
-    }
-    
-    .location-summary-image {
-        height: 500px; /* 모바일 높이 축소 */
-    }
-    
-    /* 브랜드 스토리 섹션 03 반응형 */
-    .brand-story-section-03 {
-        padding: 80px 0; /* 상하 패딩 축소 */
-    }
-    
-    .brand-story-03-container {
-        padding: 0 24px;
-    }
-    
-    .brand-story-03-text-wrapper {
-        gap: 40px; /* 간격 축소 */
-    }
-    
-    .brand-story-03-quote {
-        font-size: 48px; /* 모바일 크기 */
-        line-height: 52.8px;
-        letter-spacing: -2.4px;
-    }
-    
-    .brand-story-03-description {
-        font-size: 18px; /* 모바일 크기 */
-        line-height: 25.2px;
-        letter-spacing: -0.36px;
-    }
-    
-    .brand-story-03-author {
-        font-size: 16px; /* 모바일 크기 */
-        line-height: 16px;
-    }
-    
-    /* 모바일에서도 각 이미지의 비율 유지 (56% 축소) */
+    /* 이미지 크기 56%로 축소 (비율 유지) */
     .brand-story-01-image-item--1 .brand-story-01-image {
         width: 297px;
         height: 213px;
@@ -1423,76 +1480,277 @@ body {
         line-height: 17px;
     }
     
-    .brand-story-01-footer {
-        padding: 32px 0;
-    }
-    
     .brand-story-01-main-title {
-        font-size: 72px; /* 768px 이하에서 60% 크기 */
+        font-size: 72px;
         line-height: 72px;
     }
     
-    /* 혜택 섹션 반응형 - 768px 이하 (모바일 세로) */
-    .benefit-section-wrapper {
-        height: calc(100vh * 3.5); /* 모바일에서는 3.5배 높이 */
+    /* Brand Story Section 02 */
+    .brand-story-section-02 {
+        height: 100vh;
     }
     
-    .benefit-section {
-        height: auto; /* 자동 높이 */
-        min-height: 100vh;
+    .brand-story-02-text-wrapper {
+        padding: 64px 24px;
     }
     
+    .brand-story-02-main-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+    
+    .brand-story-02-description {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    
+    /* Brand Story Section 03 */
+    .brand-story-section-03 {
+        padding: 80px 0;
+    }
+    
+    .brand-story-03-container {
+        padding: 0 24px;
+    }
+    
+    .brand-story-03-quote {
+        font-size: 43px;
+        line-height: 47px;
+    }
+    
+    .brand-story-03-description {
+        font-size: 18px;
+        line-height: 25px;
+    }
+    
+    /* Location Summary - 레이아웃 재배치 */
+    .location-summary-container {
+        padding: 0 24px;
+    }
+    
+    .location-summary-text {
+        padding: 80px 0 40px 0;
+    }
+    
+    .location-summary-content {
+        flex-direction: column; /* 세로로 쌓기 */
+        gap: 24px;
+        align-items: flex-start;
+    }
+    
+    .location-summary-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+    
+    .location-summary-description {
+        font-size: 16px;
+        line-height: 22px;
+        max-width: 100%; /* 전체 너비 사용 */
+    }
+    
+    .location-summary-image {
+        height: 500px;
+    }
+    
+    /* Benefit Section - 레이아웃 재배치 */
     .benefit-container {
-        flex-direction: column; /* 텍스트가 상단, 이미지가 하단에 배치 */
-        padding: 0; /* 좌우 패딩 제거 */
+        flex-direction: column; /* 텍스트 위, 이미지 아래 */
+        padding: 0;
         gap: 40px;
     }
     
     .benefit-text-area {
-        padding: 80px 24px 40px 24px; /* 텍스트 영역 좌우 패딩 추가 */
+        padding: 60px 24px 40px 24px;
+        order: 1; /* 텍스트를 위에 배치 */
+    }
+    
+    .benefit-image-area {
+        order: 2; /* 이미지를 아래에 배치 */
+        height: 400px;
     }
     
     .benefit-main-title {
-        font-size: 64px;
-        line-height: 64px;
-        letter-spacing: -3.2px;
-        margin-bottom: 60px;
+        font-size: 72px;
+        line-height: 72px;
     }
     
-
-    
     .benefit-subtitle {
-        font-size: 21px; /* 768px 이하 크기 조정 */
-        line-height: 25.2px;
-        letter-spacing: -0.42px;
+        font-size: 19px;
+        line-height: 23px;
     }
     
     .benefit-description {
         font-size: 18px;
-        line-height: 25.2px;
-        letter-spacing: -0.36px;
+        line-height: 25px;
     }
     
-    .benefit-number {
-        font-size: 20px;
-        line-height: 20px;
+    /* Community Section - 레이아웃 재배치 */
+    .community-section {
+        padding: 80px 0;
     }
     
-    .benefit-image-area {
-        height: 400px; /* 모바일 이미지 높이 */
-        padding: 0; /* 이미지 영역 좌우 패딩 제거 */
+    .community-container {
+        padding: 0 24px;
     }
-}
-
-@media (max-width: 480px) {
-    .brand-story-01-container {
-        padding: 0 16px;
+    
+    .community-text {
+        margin-bottom: 60px;
+    }
+    
+    .community-main-text {
+        flex-direction: column; /* 타이틀 세로로 쌓기 */
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .community-title-left,
+    .community-title-right {
+        font-size: 72px;
+        line-height: 72px;
+        text-align: left; /* 좌측 정렬 */
+    }
+    
+    .community-description {
+        max-width: 100%;
+        margin-left: 0; /* 좌측 정렬 */
+    }
+    
+    .community-cards {
+        grid-template-columns: 1fr; /* 1열로 변경 */
         gap: 24px;
     }
     
-    .brand-story-01-scroll-container {
-        flex: 0 0 400px; /* 작은 모바일에서 높이 고정 */
-        height: 400px; /* 작은 모바일에서 높이 조정 */
+    .community-card {
+        flex-direction: column; /* 이미지와 타이틀을 세로로 배치 */
+        gap: 16px; /* 모바일에서 간격 축소 */
+    }
+    
+    .community-card-image {
+        height: 300px;
+        width: 100%; /* 전체 너비 사용 */
+    }
+    
+    .community-card-title {
+        font-size: 24px;
+        line-height: 24px;
+        text-align: left; /* 좌측 정렬 */
+    }
+    
+    /* Contact Section - 레이아웃 재배치 */
+    .contact-section {
+        height: 500px;
+    }
+    
+    .contact-content {
+        padding: 40px 24px;
+        align-items: center; /* 중앙 정렬로 변경 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+    }
+    
+    .contact-title {
+        font-size: 72px;
+        line-height: 72px;
+        text-align: center; /* 중앙 정렬 */
+    }
+    
+    .contact-info {
+        align-items: center; /* 중앙 정렬 */
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 18px;
+        line-height: 26px;
+        text-align: center; /* 중앙 정렬 */
+    }
+    
+    /* Footer */
+    .footer {
+        flex-direction: column;
+        padding: 24px;
+        gap: 24px;
+    }
+    
+    .footer__left {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .footer__logo {
+        max-width: 240px;
+    }
+    
+    .footer__menu-item {
+        font-size: 20px;
+    }
+    
+    .footer__right {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .footer__phone-number {
+        font-size: 24px;
+    }
+    
+    /* Video Section */
+    .brand-video-section {
+        height: 600px;
+    }
+    
+    .video-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+}
+
+/* 작은 모바일 (480px 이하) */
+@media (max-width: 480px) {
+    /* Container */
+    .container {
+        padding: 0 16px;
+    }
+    
+    .navbar-container {
+        padding: 0 16px;
+    }
+    
+    /* Navbar */
+    .navbar {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .logo {
+        width: 90px;
+        height: 45px;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        min-height: 500px;
+    }
+    
+    .hero-title {
+        font-size: 80px;
+        line-height: 72px;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    /* Brand Story Section 01 */
+    .brand-story-section-01 {
+        padding-top: 60px;
+        padding-bottom: 32px;
+    }
+    
+    .brand-story-01-container {
+        padding: 0 16px;
+        gap: 24px;
     }
     
     .brand-story-01-header {
@@ -1504,94 +1762,17 @@ body {
         line-height: 20px;
     }
     
-    /* 480px 이하: 간격 40px로 조정 */
+    .brand-story-01-scroll-container {
+        flex: 0 0 300px;
+        height: 300px;
+    }
+    
     .brand-story-01-image-list {
         gap: 40px;
-        padding: 0 16px 0 16px; /* 좌우 16px 마진 */
-    }
-    
-    /* 브랜드 스토리 섹션 02 반응형 */
-    .brand-story-section-02 {
-        height: 100vh; /* 작은 모바일 뷰포트 높이에 맞춤 */
-    }
-    
-    .brand-story-02-text-wrapper {
-        padding: 64px 16px; /* 상하 패딩 64px 유지 */
-        gap: 0; /* gap 제거 */
-    }
-    
-    .brand-story-02-main-title {
-        font-size: 48px;
-        line-height: 48px;
-        letter-spacing: -2px;
-    }
-    
-    .brand-story-02-description {
-        font-size: 16px;
-        line-height: 24px;
-        max-width: 100%;
-    }
-    
-    /* 로케이션 요약 섹션 반응형 - 480px 이하 */
-    .location-summary-container {
         padding: 0 16px;
     }
     
-    .location-summary-text {
-        padding: 60px 0 32px 0; /* 상하 패딩 더 축소 */
-    }
-    
-    .location-summary-content {
-        gap: clamp(24px, 2vw, 32px); /* 최소 간격 24px 유지, 반응형 처리 */
-    }
-    
-    .location-summary-title {
-        font-size: 48px; /* 작은 모바일 크기 */
-        line-height: 48px;
-        letter-spacing: -2.4px;
-    }
-    
-    .location-summary-description {
-        font-size: 14px; /* 작은 모바일 크기 */
-        line-height: 19.6px;
-        letter-spacing: -0.28px;
-    }
-    
-    .location-summary-image {
-        height: 400px; /* 작은 모바일 높이 축소 */
-    }
-    
-    /* 브랜드 스토리 섹션 03 반응형 - 작은 모바일 */
-    .brand-story-section-03 {
-        padding: 60px 0; /* 상하 패딩 더 축소 */
-    }
-    
-    .brand-story-03-container {
-        padding: 0 16px;
-    }
-    
-    .brand-story-03-text-wrapper {
-        gap: 32px; /* 간격 더 축소 */
-    }
-    
-    .brand-story-03-quote {
-        font-size: 36px; /* 작은 모바일 크기 */
-        line-height: 39.6px;
-        letter-spacing: -1.8px;
-    }
-    
-    .brand-story-03-description {
-        font-size: 16px; /* 작은 모바일 크기 */
-        line-height: 22.4px;
-        letter-spacing: -0.32px;
-    }
-    
-    .brand-story-03-author {
-        font-size: 14px; /* 작은 모바일 크기 */
-        line-height: 14px;
-    }
-    
-    /* 작은 모바일에서도 각 이미지의 비율 유지 (45% 축소) */
+    /* 이미지 크기 45%로 축소 (비율 유지) */
     .brand-story-01-image-item--1 .brand-story-01-image {
         width: 239px;
         height: 171px;
@@ -1648,62 +1829,224 @@ body {
     }
     
     .brand-story-01-unit {
-        font-size: 12px;
+        font-size: 13px;
         line-height: 14px;
     }
     
-    .brand-story-01-footer {
-        padding: 24px 0;
-    }
-    
     .brand-story-01-main-title {
-        font-size: 48px; /* 480px 이하에서 40% 크기 */
-        line-height: 48px;
+        font-size: 60px;
+        line-height: 60px;
     }
     
-    /* 혜택 섹션 반응형 - 480px 이하 (작은 모바일) */
+    /* Brand Story Section 02 */
+    .brand-story-02-text-wrapper {
+        padding: 64px 16px;
+    }
+    
+    .brand-story-02-main-title {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    
+    .brand-story-02-description {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    /* Brand Story Section 03 */
+    .brand-story-section-03 {
+        padding: 60px 0;
+    }
+    
+    .brand-story-03-container {
+        padding: 0 16px;
+    }
+    
+    .brand-story-03-quote {
+        font-size: 36px;
+        line-height: 40px;
+    }
+    
+    .brand-story-03-description {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    
+    /* Location Summary - 레이아웃 재배치 */
+    .location-summary-container {
+        padding: 0 16px;
+    }
+    
+    .location-summary-text {
+        padding: 60px 0 32px 0;
+    }
+    
+    .location-summary-content {
+        flex-direction: column; /* 세로로 쌓기 */
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .location-summary-title {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    
+    .location-summary-description {
+        font-size: 14px;
+        line-height: 20px;
+        max-width: 100%; /* 전체 너비 사용 */
+    }
+    
+    .location-summary-image {
+        height: 400px;
+    }
+    
+    /* Benefit Section - 레이아웃 재배치 */
     .benefit-container {
-        flex-direction: column; /* 텍스트가 상단, 이미지가 하단에 배치 */
-        padding: 0; /* 좌우 패딩 제거 */
+        flex-direction: column; /* 텍스트 위, 이미지 아래 */
         gap: 32px;
     }
     
     .benefit-text-area {
-        padding: 60px 16px 32px 16px; /* 텍스트 영역 좌우 패딩 추가 */
+        padding: 48px 16px 32px 16px;
+        order: 1; /* 텍스트를 위에 배치 */
+    }
+    
+    .benefit-image-area {
+        order: 2; /* 이미지를 아래에 배치 */
+        height: 300px;
     }
     
     .benefit-main-title {
-        font-size: 48px;
-        line-height: 48px;
-        letter-spacing: -2.4px;
-        margin-bottom: 40px;
+        font-size: 60px;
+        line-height: 60px;
     }
     
-
-    
     .benefit-subtitle {
-        font-size: 16px; /* 480px 이하 크기 조정 */
-        line-height: 19.2px;
-        letter-spacing: -0.32px;
+        font-size: 16px;
+        line-height: 19px;
     }
     
     .benefit-description {
         font-size: 16px;
-        line-height: 22.4px;
-        letter-spacing: -0.32px;
+        line-height: 22px;
     }
     
-    .benefit-number {
+    /* Community Section - 레이아웃 재배치 */
+    .community-section {
+        padding: 60px 0;
+    }
+    
+    .community-container {
+        padding: 0 16px;
+    }
+    
+    .community-text {
+        margin-bottom: 40px;
+    }
+    
+    .community-main-text {
+        flex-direction: column; /* 타이틀 세로로 쌓기 */
+        gap: 16px;
+    }
+    
+    .community-title-left,
+    .community-title-right {
+        font-size: 60px;
+        line-height: 60px;
+        text-align: left; /* 좌측 정렬 */
+    }
+    
+    .community-description {
+        max-width: 100%;
+        margin-left: 0; /* 좌측 정렬 */
+    }
+    
+    .community-cards {
+        grid-template-columns: 1fr; /* 1열로 변경 */
+        gap: 20px;
+    }
+    
+    .community-card {
+        flex-direction: column; /* 이미지와 타이틀을 세로로 배치 */
+        gap: 12px; /* 작은 모바일에서 간격 더 축소 */
+    }
+    
+    .community-card-image {
+        height: 250px;
+        width: 100%; /* 전체 너비 사용 */
+    }
+    
+    .community-card-title {
+        font-size: 22px;
+        line-height: 22px;
+        text-align: left; /* 좌측 정렬 */
+    }
+    
+    /* Contact Section - 레이아웃 재배치 */
+    .contact-section {
+        height: 400px;
+    }
+    
+    .contact-content {
+        padding: 32px 16px;
+        align-items: center; /* 중앙 정렬 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+    }
+    
+    .contact-title {
+        font-size: 60px;
+        line-height: 60px;
+        text-align: center; /* 중앙 정렬 */
+    }
+    
+    .contact-info {
+        align-items: center; /* 중앙 정렬 */
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center; /* 중앙 정렬 */
+    }
+    
+    /* Footer */
+    .footer {
+        padding: 20px 16px;
+        gap: 20px;
+    }
+    
+    .footer__logo {
+        max-width: 200px;
+    }
+    
+    .footer__menu-item {
         font-size: 18px;
-        line-height: 18px;
     }
     
-    .benefit-image-area {
-        height: 300px; /* 작은 모바일 이미지 높이 */
-        padding: 0; /* 이미지 영역 좌우 패딩 제거 */
+    .footer__phone-number {
+        font-size: 20px;
+    }
+    
+    .footer__company-name,
+    .footer__ceo,
+    .footer__registration,
+    .footer__disclaimer {
+        font-size: 13px;
+    }
+    
+    /* Video Section */
+    .brand-video-section {
+        height: 500px;
+    }
+    
+    .video-title {
+        font-size: 60px;
+        line-height: 60px;
     }
 }
-
 
 
 .section-title {
@@ -2011,96 +2354,8 @@ body {
     text-transform: uppercase;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 1200px) {
-    .community-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    
-    .community-title-left,
-    .community-title-right {
-        font-size: 80px;
-        line-height: 80px;
-    }
-}
 
-@media (max-width: 768px) {
-    .community-section {
-        padding: 80px 0;
-    }
-    
-    .community-container {
-        padding: 0 24px;
-    }
-    
-    .community-text {
-        margin-bottom: 60px;
-    }
-    
-    .community-main-text {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-    
-    .community-title-left,
-    .community-title-right {
-        font-size: 60px;
-        line-height: 60px;
-        letter-spacing: -3px;
-        text-align: left;
-    }
-    
-    .community-description {
-        max-width: 100%;
-        margin-left: 0;
-    }
-    
-    .community-description p {
-        font-size: 18px;
-        line-height: 26px;
-    }
-    
-    .community-cards {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    
-    .community-card {
-        gap: 16px;
-    }
-    
-    .community-card-image {
-        height: 300px;
-    }
-    
-    .community-card-button-area {
-        bottom: 12px;
-        right: 12px;
-    }
-    
-    .community-card-title {
-        font-size: 24px;
-        line-height: 24px;
-    }
-    
-    .community-card-detail-text p {
-        font-size: 16px;
-        line-height: 22px;
-    }
-}
 
-@media (max-width: 480px) {
-    .community-card-image {
-        height: 250px;
-    }
-    
-    .community-card-button-area {
-        bottom: 8px;
-        right: 8px;
-    }
-}
 
 /* 연락처 섹션 */
 .contact-section {
@@ -2202,55 +2457,8 @@ body {
     text-align: left;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 1200px) {
-    .contact-title {
-        font-size: 80px;
-        line-height: 80px;
-    }
-    
-    .contact-address,
-    .contact-hours {
-        font-size: 20px;
-        line-height: 28px;
-    }
-}
 
-@media (max-width: 768px) {
-    .contact-section {
-        height: 500px;
-    }
-    
-    .contact-content {
-        position: absolute; /* 모바일에서도 우상단 고정 */
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        padding: 48px; /* 좌우상하 패딩 48px */
-        align-items: flex-end;
-        text-align: right;
-    }
-    
-    .contact-title {
-        font-size: 60px;
-        line-height: 60px;
-        letter-spacing: -3px;
-        margin-bottom: 24px;
-    }
-    
-    .contact-info {
-        align-items: center;
-        gap: 2px;
-    }
-    
-    .contact-address,
-    .contact-hours {
-        font-size: 18px;
-        line-height: 26px;
-        text-align: center;
-    }
-}
+
 
 /* Footer 컴포넌트 - components.css와 동일한 스타일 */
 .footer {
@@ -2280,42 +2488,6 @@ body {
 }
 
 /* 데스크탑 (1025px 이상) - 간격을 auto로 설정하여 공간 분배 */
-@media (min-width: 1025px) {
-  .footer__left {
-    gap: 0; /* 데스크탑에서는 gap 제거 */
-    min-height: 504px; /* 데스크탑에서 부모 높이 꽉 채우기 */
-  }
-  
-  /* logo-section과 company-info 사이에 자동 간격 추가 */
-  .footer__left > .footer__logo-section + .footer__company-info {
-    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
-  }
-  
-  /* footer__right의 y축 시작점을 footer__menu와 같게 */
-  .footer__right {
-    align-self: flex-start; /* 상단 정렬 */
-    /* footer__logo 높이 (aspect-ratio 2:1) + gap 값 */
-    padding-top: calc(clamp(240px, 30vw, 320px) / 2 + clamp(24px, 4vh, 48px));
-    gap: 0; /* gap 제거하여 auto 간격 적용 */
-    min-height: 504px; /* 컨테이너 높이 504px 채우기 */
-  }
-  
-  /* footer__right 내부에서 contact-section과 copyright 사이에 자동 간격 추가 */
-  .footer__right > .footer__contact-section + .footer__copyright {
-    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
-  }
-  
-  /* footer__right-extended가 컨테이너 504px를 꽉 채우고, 요소 간격을 auto로 설정 */
-  .footer__right-extended {
-    gap: 0; /* gap 제거하여 auto 간격 적용 */
-    min-height: 504px; /* 컨테이너 높이 504px 채우기 */
-  }
-  
-  /* footer__right-extended 내부에서 back-to-top과 made-by 사이에 자동 간격 추가 */
-  .footer__right-extended > .footer__back-to-top + .footer__made-by {
-    margin-top: auto; /* 위쪽 자동 간격으로 하단 정렬 */
-  }
-}
 
 .footer__logo-section {
   display: flex;
@@ -2581,170 +2753,172 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Footer 모바일 반응형 (768px 이하) - 스택 레이아웃 */
-@media (max-width: 768px) {
-  .footer {
-    flex-direction: column; /* 세로 배치 */
-    padding: clamp(20px, 5vw, 24px);
-    gap: clamp(20px, 4vh, 32px);
-    min-height: auto;
-  }
-  
-  .footer__left {
-    max-width: 100%;
-    width: 100%;
-  }
-  
-  .footer__logo {
-    width: 100%;
-    max-width: 280px;
-  }
-  
-  .footer__menu {
-    gap: 20px; /* 모바일에서 메뉴 간격 */
-  }
-  
-  .footer__menu-item {
-    font-size: 20px;
-  }
-  
-  .footer__company-details {
-    flex-direction: column; /* 모바일에서 세로 배치 */
-    align-items: flex-start;
-    gap: 8px;
-  }
-  
-  .footer__right {
-    max-width: 100%;
-    width: 100%;
-    gap: 16px;
-  }
-  
-  .footer__phone-number {
-    font-size: 24px;
-  }
-  
-  .footer__right-extended {
-    max-width: 100%;
-    width: 100%;
-    align-items: flex-start; /* 모바일에서 좌측 정렬 */
-    gap: 20px;
-  }
-  
-  .footer__made-by {
-    text-align: left; /* 모바일에서 좌측 정렬 */
-  }
-  
-  .footer__disclaimer-extended {
-    display: block; /* 모바일에서 표시 */
-    width: 100%;
-    text-align: left;
-  }
-}
+/* ============================================
+   반응형 디자인 (규칙 기반 재구성)
+   ============================================
+   브레이크포인트:
+   - 태블릿: 769px - 1024px
+   - 모바일: 481px - 768px  
+   - 작은 모바일: 480px 이하
+   
+   규칙:
+   - 폰트 크기: PC 기준 80% (태블릿), 60% (모바일), 50% (작은 모바일)
+   - 패딩/마진: PC 기준 75% (태블릿), 50% (모바일), 40% (작은 모바일)
+   - 이미지/높이: PC 기준 85% (태블릿), 70% (모바일), 60% (작은 모바일)
+   ============================================ */
 
-/* Footer 매우 작은 모바일 (480px 이하) */
-@media (max-width: 480px) {
-  .footer__logo {
-    max-width: 240px;
-  }
-  
-  .footer__menu-item {
-    font-size: 18px;
-  }
-  
-  .footer__phone-number {
-    font-size: 20px;
-  }
-  
-  .footer__company-name,
-  .footer__ceo,
-  .footer__registration,
-  .footer__disclaimer {
-    font-size: 12px;
-  }
-}
-
-/* 반응형 디자인 */
-@media (max-width: 1400px) {
-    /* navbar 텍스트 크기 조절 - 중간 해상도 */
-    .menu-item {
-        font-size: 22px; /* 기본 24px에서 22px로 조절 */
-    }
-}
-
-@media (max-width: 1200px) {
+/* 태블릿 (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Container */
     .container {
-        padding: 0 20px;
+        padding: 0 32px;
     }
     
     .navbar-container {
         padding: 0 32px;
     }
     
-    /* navbar 반응형 - 텍스트 크기 조절 */
+    /* Navbar */
     .menu-item {
-        font-size: 20px; /* 22px에서 20px로 축소 */
+        font-size: 20px;
     }
     
-    .hero-content,
-    .video-content {
-        padding: 0 20px;
-    }
-    
+    /* Hero Section */
     .hero-title {
-        font-size: 180px;
-        line-height: 162px;
+        font-size: 160px;
+        line-height: 144px;
     }
     
-    .section-title {
-        font-size: 80px;
-        line-height: 80px;
+    .hero-subtitle {
+        font-size: 18px;
+        line-height: 26px;
     }
     
+    /* Brand Story Section 01 */
+    .brand-story-01-container {
+        padding: 0 32px;
+    }
+    
+    .brand-story-01-subtitle {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    
+    .brand-story-01-main-title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    /* Brand Story Section 02 */
+    .brand-story-02-main-title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .brand-story-02-description {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    
+    /* Brand Story Section 03 */
+    .brand-story-03-quote {
+        font-size: 58px;
+        line-height: 64px;
+    }
+    
+    .brand-story-03-description {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    
+    /* Location Summary */
+    .location-summary-title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .location-summary-description {
+        font-size: 18px;
+        line-height: 25px;
+    }
+    
+    /* Benefit Section */
+    .benefit-main-title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .benefit-subtitle {
+        font-size: 24px;
+        line-height: 29px;
+    }
+    
+    /* Community Section */
+    .community-title-left,
+    .community-title-right {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .community-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Contact Section */
+    .contact-title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    
+    /* Video Section */
     .video-title {
-        font-size: 100px;
-        line-height: 100px;
-    }
-    
-    .main-quote {
-        font-size: 60px;
-        line-height: 66px;
+        font-size: 96px;
+        line-height: 96px;
     }
 }
 
-@media (max-width: 768px) {
-    .navbar {
-        height: auto; /* 컨텐츠에 맞게 hug 처리 */
+/* 모바일 (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* Container */
+    .container {
+        padding: 0 24px;
     }
     
     .navbar-container {
-        padding: 0 20px;
-        align-items: flex-start; /* 상단 정렬 - logo와 navbar-menu가 top에 정렬 */
+        padding: 0 24px;
     }
     
-    .logo {
-        width: 120px; /* 비율 유지 2:1 */
-        height: 60px; /* 최소 세로 사이즈 60px */
-    }
-    
-    .logo-img {
-        max-width: 100%;
+    /* Navbar */
+    .navbar {
         height: auto;
+        padding-top: 24px;
+        padding-bottom: 24px;
     }
     
-    /* navbar 메뉴 세로 정렬 */
     .navbar-menu {
-        flex-direction: column; /* 세로 정렬 */
-        gap: 12px; /* 간격 12px */
-        align-items: flex-start; /* 좌측 정렬 - 로고와 같은 y축 위치 */
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
     }
     
     .menu-item {
-        font-size: 20px; /* 텍스트 크기 20px */
+        font-size: 20px;
     }
     
+    .logo {
+        width: 100px;
+        height: 50px;
+    }
+    
+    /* Hero Section */
     .hero-section {
-        min-height: 800px;
+        min-height: 600px;
     }
     
     .hero-title {
@@ -2757,62 +2931,228 @@ body {
         line-height: 24px;
     }
     
-    .text-button {
+    /* Brand Story Section 01 */
+    .brand-story-section-01 {
+        height: auto;
+        min-height: 600px;
+    }
+    
+    .brand-story-01-container {
+        padding: 0 24px;
+        gap: 32px;
+    }
+    
+    .brand-story-01-scroll-container {
+        flex: 0 0 400px;
+        height: 400px;
+    }
+    
+    .brand-story-01-subtitle {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    .brand-story-01-main-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+    
+    /* Brand Story Section 02 */
+    .brand-story-section-02 {
+        height: 100vh;
+    }
+    
+    .brand-story-02-main-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+    
+    .brand-story-02-description {
         font-size: 18px;
+        line-height: 26px;
     }
     
-    .section-title {
-        font-size: 60px;
-        line-height: 60px;
+    /* Brand Story Section 03 */
+    .brand-story-section-03 {
+        padding: 80px 0;
     }
     
-    .video-title {
-        font-size: 80px;
-        line-height: 80px;
+    .brand-story-03-container {
+        padding: 0 24px;
     }
     
-    .main-quote {
-        font-size: 40px;
-        line-height: 44px;
+    .brand-story-03-quote {
+        font-size: 43px;
+        line-height: 47px;
     }
     
-    .image-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
+    .brand-story-03-description {
+        font-size: 18px;
+        line-height: 25px;
     }
     
-    .gallery-image {
-        height: 200px;
+    /* Location Summary */
+    .location-summary-container {
+        padding: 0 24px;
     }
     
-    .service-cards {
+    .location-summary-text {
+        padding: 80px 0 40px 0;
+    }
+    
+    .location-summary-content {
+        flex-direction: column;
+        gap: 32px;
+    }
+    
+    .location-summary-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+    
+    .location-summary-description {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    
+    .location-summary-image {
+        height: 500px;
+    }
+    
+    /* Benefit Section */
+    .benefit-container {
+        flex-direction: column;
+        padding: 0;
+        gap: 40px;
+    }
+    
+    .benefit-text-area {
+        padding: 60px 24px 40px 24px;
+    }
+    
+    .benefit-main-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+    
+    .benefit-subtitle {
+        font-size: 19px;
+        line-height: 23px;
+    }
+    
+    .benefit-description {
+        font-size: 18px;
+        line-height: 25px;
+    }
+    
+    .benefit-image-area {
+        height: 400px;
+    }
+    
+    /* Community Section */
+    .community-section {
+        padding: 80px 0;
+    }
+    
+    .community-container {
+        padding: 0 24px;
+    }
+    
+    .community-main-text {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .community-title-left,
+    .community-title-right {
+        font-size: 72px;
+        line-height: 72px;
+        text-align: left;
+    }
+    
+    .community-cards {
         grid-template-columns: 1fr;
-        gap: 30px;
     }
     
+    .community-card-image {
+        height: 300px;
+    }
     
-    /* Footer 반응형 스타일은 위의 footer 섹션에서 관리됨 */
+    /* Contact Section */
+    .contact-section {
+        height: 500px;
+    }
+    
+    .contact-content {
+        padding: 40px 24px;
+    }
+    
+    .contact-title {
+        font-size: 72px;
+        line-height: 72px;
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    
+    /* Footer */
+    .footer {
+        flex-direction: column;
+        padding: 24px;
+        gap: 24px;
+    }
+    
+    .footer__left {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .footer__logo {
+        max-width: 240px;
+    }
+    
+    .footer__menu-item {
+        font-size: 20px;
+    }
+    
+    .footer__right {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .footer__phone-number {
+        font-size: 24px;
+    }
 }
 
+/* 작은 모바일 (480px 이하) */
 @media (max-width: 480px) {
+    /* Container */
     .container {
-        padding: 0 15px;
+        padding: 0 16px;
     }
     
-    /* navbar 설정 - 모바일 해상도 */
     .navbar-container {
-        padding: 0 20px; /* 좌우 패딩 20px */
-        align-items: flex-start; /* 상단 정렬 - logo와 navbar-menu가 top에 정렬 */
+        padding: 0 16px;
     }
     
-    /* navbar 메뉴 간격 및 텍스트 크기 */
-    .navbar-menu {
-        gap: 12px; /* 간격 12px */
-        align-items: flex-start; /* 좌측 정렬 - 로고와 같은 y축 위치 */
+    /* Navbar */
+    .navbar {
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
     
-    .menu-item {
-        font-size: 20px; /* 텍스트 크기 20px */
+    .logo {
+        width: 90px;
+        height: 45px;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        min-height: 500px;
     }
     
     .hero-title {
@@ -2820,27 +3160,171 @@ body {
         line-height: 72px;
     }
     
-    .section-title {
-        font-size: 40px;
-        line-height: 40px;
+    .hero-subtitle {
+        font-size: 14px;
+        line-height: 20px;
     }
     
-    .video-title {
+    /* Brand Story Section 01 */
+    .brand-story-01-container {
+        padding: 0 16px;
+        gap: 24px;
+    }
+    
+    .brand-story-01-scroll-container {
+        flex: 0 0 300px;
+        height: 300px;
+    }
+    
+    .brand-story-01-subtitle {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    .brand-story-01-main-title {
         font-size: 60px;
         line-height: 60px;
     }
     
-    .main-quote {
-        font-size: 32px;
-        line-height: 35.2px;
+    /* Brand Story Section 02 */
+    .brand-story-02-main-title {
+        font-size: 60px;
+        line-height: 60px;
     }
     
-    .image-gallery {
-        grid-template-columns: 1fr;
-        gap: 10px;
+    .brand-story-02-description {
+        font-size: 16px;
+        line-height: 24px;
     }
     
-    .gallery-image {
-        height: 150px;
+    /* Brand Story Section 03 */
+    .brand-story-section-03 {
+        padding: 60px 0;
+    }
+    
+    .brand-story-03-container {
+        padding: 0 16px;
+    }
+    
+    .brand-story-03-quote {
+        font-size: 36px;
+        line-height: 40px;
+    }
+    
+    .brand-story-03-description {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    
+    /* Location Summary */
+    .location-summary-container {
+        padding: 0 16px;
+    }
+    
+    .location-summary-text {
+        padding: 60px 0 32px 0;
+    }
+    
+    .location-summary-title {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    
+    .location-summary-description {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    .location-summary-image {
+        height: 400px;
+    }
+    
+    /* Benefit Section */
+    .benefit-text-area {
+        padding: 48px 16px 32px 16px;
+    }
+    
+    .benefit-main-title {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    
+    .benefit-subtitle {
+        font-size: 16px;
+        line-height: 19px;
+    }
+    
+    .benefit-description {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    
+    .benefit-image-area {
+        height: 300px;
+    }
+    
+    /* Community Section */
+    .community-section {
+        padding: 60px 0;
+    }
+    
+    .community-container {
+        padding: 0 16px;
+    }
+    
+    .community-title-left,
+    .community-title-right {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    
+    .community-card-image {
+        height: 250px;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+        height: 400px;
+    }
+    
+    .contact-content {
+        padding: 32px 16px;
+    }
+    
+    .contact-title {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    
+    .contact-address,
+    .contact-hours {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    /* Footer */
+    .footer {
+        padding: 20px 16px;
+        gap: 20px;
+    }
+    
+    .footer__logo {
+        max-width: 200px;
+    }
+    
+    .footer__menu-item {
+        font-size: 18px;
+    }
+    
+    .footer__phone-number {
+        font-size: 20px;
+    }
+    
+    .footer__company-name,
+    .footer__ceo,
+    .footer__registration,
+    .footer__disclaimer {
+        font-size: 13px;
     }
 }
+
